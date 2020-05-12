@@ -1,0 +1,17 @@
+project MCServerManeger:
+
+	description:
+
+
+
+	todo:
+		main:
+		
+		
+		
+		bags:
+		
+		- при нажатии Effect происходит краш(приложения) если 
+			на сервере нет игроков
+			
+			
