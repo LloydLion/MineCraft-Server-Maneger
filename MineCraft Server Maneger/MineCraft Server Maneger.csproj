@@ -87,7 +87,6 @@
     <Compile Include="InstallServerForm.Designer.cs">
       <DependentUpon>InstallServerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\INamedCollection.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,7 +109,6 @@
     <Compile Include="Models\ServerStade.cs" />
     <Compile Include="ServerManeger.cs" />
     <Compile Include="Static.cs" />
-    <Compile Include="SubClasses\NamedCollection.cs" />
     <Compile Include="UIManeger.cs" />
     <Compile Include="VersionManeger.cs" />
     <Compile Include="VersionSelectionForm.cs">
@@ -163,7 +161,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SubClasses\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -1,17 +1,49 @@
-project MCServerManeger:
+;project MCServerManeger:
 
-	description:
+	;description:
+		Server manager for minecraft
+		Min support version 1.7.2
 
-
-
-	todo:
-		main:
+	;todo:
+		;alpha 0.1:
+			;main:
+				
+				
+			
+			;bags:
+				;non test:
+					- при нажатии Effect происходит краш(приложения) если 
+						на сервере нет игроков
+				;testing result:
+				
+					//non tested
+				
+	;version ctrl:
+	
+		;description:
 		
+			folder for changelogs - ".\version\"
 		
+		;alpha 0.1:
 		
-		bags:
-		
-		- при нажатии Effect происходит краш(приложения) если 
-			на сервере нет игроков
+			;description:
+			
+				//Not Relesed
 			
 			
+			;git commit:
+				//...exemple commit..
+			
+			;alpha test result:
+			
+				;description:
+			
+					//very bad!!!!
+			
+				;todo bags:
+					
+					//- ...
+		
+		.
+		.
+		.

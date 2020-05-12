@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using MineCraft_Server_Maneger.SubClasses;
 
 namespace MineCraft_Server_Maneger
 {
@@ -146,7 +145,7 @@ namespace MineCraft_Server_Maneger
 			#endregion
 		}
 
-        private static class SubStore
+		private static class SubStore
 		{
 			public class Gamerule : INamedObject
 			{
