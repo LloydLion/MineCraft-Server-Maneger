@@ -25,10 +25,7 @@ namespace MineCraft_Server_Maneger.Actions
             
             UIManeger.GlobalManeger.ListedPlayers.Select((g) => g.Name).ToArray(), 
 
-            new string[]
-            {
-
-            });
+            ServerManeger.GlobalManeger.AvailableEffects.Select((s) => s.Name).ToArray());
 
             dialog.ShowDialog();
             var result = dialog.Result;

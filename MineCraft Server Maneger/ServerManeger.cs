@@ -31,19 +31,21 @@ namespace MineCraft_Server_Maneger
             get 
             {
                 var p = pluginSubManeger.List("players");
-                var b = p.Select((g) => g.Replace("*&*:::*&*", "\u1234").Split('\u1234')).ToArray();
                 var list = new List<Player>();
 
 
-                foreach (var i in b)
+                foreach (var i in p)
                 {
+                    char[] a = new char[i.Length - 1];
+                    Array.Copy(i.ToArray(), 1, a, 0, a.Length);
+                    string f = new string(a);
                     var player = new Player
                     {
-                        Name = i[0],
+                        Name = f,
                         Id = "minecraft:player"
                     };
 
-                    int d = int.Parse(i[1]);
+                    int d = int.Parse(new string(i[0], 1));
 
                     if ((d & 1) != 0) player.Tags.Add(Player.PlayerTag.Banned);
                     if ((d & 2) != 0) player.Tags.Add(Player.PlayerTag.Whitelisted);
@@ -213,13 +215,13 @@ namespace MineCraft_Server_Maneger
 
                 var t = ReadConsoleSegment("__SqiMSMrr_L_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
                     "__SqiMSMrr_L_E_d1a6e6d543f8bdc92ed38af4ca0b5b30");
-                var g = t.Replace("__SqiMSMrr_L_E_S_d1a6e6d543f8bdc92ed38af4ca0b5b30", "\u1234").Split('\u1234');
-                var h = new string[g.Length - 1];
-                Array.Copy(g, h, h.Length);
+                var g = t.Replace("\n", "\u1234").Split('\u1234');
+                //var h = new string[g.Length - 1];
+                //Array.Copy(g, h, h.Length);
 
-                h[0] = h[0].Substring("[11:24:25 INFO]: ".Length);
+                g = g.Select((s) => s.Substring("[11:24:25 INFO]: ".Length)).ToArray();
 
-                return h;
+                return g;
             }
 
             private void InvokeLLLManeger(string args)
