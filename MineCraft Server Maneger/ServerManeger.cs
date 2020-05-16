@@ -5,6 +5,7 @@ using System.Linq;
 using MineCraft_Server_Maneger.Models.Generic;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger
 {
@@ -24,7 +25,6 @@ namespace MineCraft_Server_Maneger
         public EffectType[] AvailableEffects { get => VersionManeger.AvailableEffects; }
 
         #endregion
-
 
         private Player[] Players 
         { 
@@ -59,7 +59,37 @@ namespace MineCraft_Server_Maneger
             } 
         }
 
+        public BlockInfo[] AvailableBlocks
+        {
+            get
+            {
+                if (availableBlocksCache == null)
+                {
+                    var a = pluginSubManeger.List("blocks");
+                    var list = new List<BlockInfo>();
+
+                    foreach (var item in a)
+                    {
+                        var split = item.Replace("%$#@!", "\u1234").Split('\u1234');
+                        var el = new BlockInfo()
+                        {
+                            NumId = int.Parse(split[0]),
+                            Id = split[2],
+                            DisplayName = split[1]
+                        };
+
+                        list.Add(el);
+                    }
+
+                    availableBlocksCache = list.ToArray();
+                }
+
+                return availableBlocksCache;
+            }
+        }
+
         private readonly ControlPluginSubManeger pluginSubManeger;
+        private BlockInfo[] availableBlocksCache;
 
         public ServerManeger(Process serverProcess, MCVersion version)
         {
@@ -152,7 +182,7 @@ namespace MineCraft_Server_Maneger
 
                     if (MCVersion >= new MCVersion("1.13")) args.Add("give");
 
-                    args.Add(VersionManeger.GetIDFromEffectType(f.EffectType));
+                    args.Add(VersionManeger.GetIDFromIDoubleIndicatedElement(f.EffectType));
                     args.Add(f.Time.ToString());
                     args.Add(f.Power.ToString());
                     args.Add(f.HideParticiples.ToString().ToLower());
@@ -182,6 +212,16 @@ namespace MineCraft_Server_Maneger
         public EffectType GetEffectTypeByName(string name)
         {
             return AvailableEffects.Where((s) => s.Name == name).Single();
+        }
+        public BlockInfo GetBlockInfoByName(string name)
+        {
+            return AvailableBlocks.Where((s) => s.DisplayName == name).Single();
+        }
+
+        public void SetBlock(BlockInfo block, (int x, int y, int z) cords, out string result)
+        {
+            result = Execute(new Command("setblock", cords.x.ToString(), cords.y.ToString(), cords.z.ToString(), 
+                VersionManeger.GetIDFromIDoubleIndicatedElement(block), block.Meta.ToString()));
         }
 
         private class ControlPluginSubManeger
@@ -229,7 +269,7 @@ namespace MineCraft_Server_Maneger
                 Maneger.Writer.WriteLine("_lll_manager_ctrl " + args);
             }
 
-            private string ReadConsoleSegment(string start, string end)
+            public string ReadConsoleSegment(string start, string end)
             {
                 StringBuilder builder = new StringBuilder();
                 StringBuilder alphaBuilder = new StringBuilder();

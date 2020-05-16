@@ -197,9 +197,14 @@ namespace MineCraft_Server_Maneger
 			return result;
 		}
 
-		public string GetIDFromEffectType(EffectType type)
+		public string GetIDFromIDoubleIndicatedElement(IDoubleIndicatedElement el)
 		{
-			return Version >= new MCVersion("1.8") ? type.Id : type.NumId.ToString();
+			if (el is EffectType || el is ItemInfo)
+			{
+				return Version >= new MCVersion("1.8") ? el.Id : el.NumId.ToString();
+			}
+			else
+				throw new ArgumentException("el isn't has valid type!", nameof(el));
 		}
 	}
 }

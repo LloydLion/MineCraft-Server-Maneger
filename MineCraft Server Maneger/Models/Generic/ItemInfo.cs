@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Models.Generic
 {
-    class Entity : INamedObject, IIndicatedElement
+    class ItemInfo : IDoubleIndicatedElement
     {
+        public string DisplayName { get; set; }
+        public int NumId { get; set; }
         public string Id { get; set; }
-        public string Name { get; set; }
+        public int? Meta { get; set; }
     }
 }

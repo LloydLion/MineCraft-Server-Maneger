@@ -53,6 +53,7 @@
     <Compile Include="Actions\ExecuteEffectAction.cs" />
     <Compile Include="Actions\ExecuteGameruleAction.cs" />
     <Compile Include="Actions\ExecuteSayAction.cs" />
+    <Compile Include="Actions\ExecuteSetBlockAction.cs" />
     <Compile Include="Actions\ExecuteTimeAction.cs" />
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
@@ -75,6 +76,12 @@
     <Compile Include="Forms\ExecuteSayActionForm.Designer.cs">
       <DependentUpon>ExecuteSayActionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ExecuteSetBlockActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteSetBlockActionForm.Designer.cs">
+      <DependentUpon>ExecuteSetBlockActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExecuteTimeActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,17 +94,21 @@
     <Compile Include="InstallServerForm.Designer.cs">
       <DependentUpon>InstallServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDoubleIndicatedElement.cs" />
+    <Compile Include="Interfaces\IIndicatedElement.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Generic\BlockInfo.cs" />
     <Compile Include="Models\Generic\Command.cs" />
     <Compile Include="Models\Generic\Effect.cs" />
     <Compile Include="Models\Generic\EffectType.cs" />
     <Compile Include="Models\Generic\Entity.cs" />
     <Compile Include="Models\Generic\Gamerule.cs" />
+    <Compile Include="Models\Generic\ItemInfo.cs" />
     <Compile Include="Models\Generic\MCVersion.cs" />
     <Compile Include="Interfaces\INamedObject.cs" />
     <Compile Include="Models\Generic\Player.cs" />
@@ -125,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteSayActionForm.resx">
       <DependentUpon>ExecuteSayActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExecuteSetBlockActionForm.resx">
+      <DependentUpon>ExecuteSetBlockActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteTimeActionForm.resx">
       <DependentUpon>ExecuteTimeActionForm.cs</DependentUpon>

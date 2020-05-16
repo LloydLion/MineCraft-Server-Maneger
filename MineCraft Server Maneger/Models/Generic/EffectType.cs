@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Models.Generic
 {
-    class EffectType : INamedObject
+    class EffectType : INamedObject, IDoubleIndicatedElement
     {
         public string Name { get; set; }
         public string Id { get; set; }
