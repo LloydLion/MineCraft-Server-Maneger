@@ -59,67 +59,7 @@ namespace MineCraft_Server_Maneger
             } 
         }
 
-        public BlockInfo[] AvailableBlocks
-        {
-            get
-            {
-                if (availableBlocksCache == null)
-                {
-                    var a = pluginSubManeger.List("blocks");
-                    var list = new List<BlockInfo>();
-
-                    foreach (var item in a)
-                    {
-                        var split = item.Replace("%$#@!", "\u1234").Split('\u1234');
-                        var el = new BlockInfo()
-                        {
-                            NumId = int.Parse(split[0]),
-                            Id = split[2],
-                            DisplayName = split[1]
-                        };
-
-                        list.Add(el);
-                    }
-
-                    availableBlocksCache = list.ToArray();
-                }
-
-                return availableBlocksCache;
-            }
-        }
-
-        public ItemInfo[] AvailableItems
-        {
-            get
-            {
-                if (availableItemsCache == null)
-                {
-                    var a = pluginSubManeger.List("items");
-                    var list = new List<ItemInfo>();
-
-                    foreach (var item in a)
-                    {
-                        var split = item.Replace("%$#@!", "\u1234").Split('\u1234');
-                        var el = new ItemInfo()
-                        {
-                            NumId = int.Parse(split[0]),
-                            Id = split[2],
-                            DisplayName = split[1]
-                        };
-
-                        list.Add(el);
-                    }
-
-                    availableItemsCache = list.ToArray();
-                }
-
-                return availableItemsCache;
-            }
-        }
-
         private readonly ControlPluginSubManeger pluginSubManeger;
-        private BlockInfo[] availableBlocksCache;
-        private ItemInfo[] availableItemsCache;
 
         public ServerManeger(Process serverProcess, MCVersion version)
         {
@@ -242,30 +182,6 @@ namespace MineCraft_Server_Maneger
         public EffectType GetEffectTypeByName(string name)
         {
             return AvailableEffects.Where((s) => s.Name == name).Single();
-        }
-        public BlockInfo GetBlockInfoByName(string name)
-        {
-            return AvailableBlocks.Where((s) => s.DisplayName == name).Single();
-        }
-
-        public void SetBlock(BlockInfo block, (int x, int y, int z) cords, out string result)
-        {
-            result = Execute(new Command("setblock", cords.x, cords.y, cords.z, 
-                VersionManeger.GetIDFromIDoubleIndicatedElement(block), block.Meta.ToString()));
-        }
-
-        public void GiveItem(ItemInfo item, Player player, int count, out string result)
-        {
-            if (MCVersion >= new MCVersion("1.13"))
-            {
-                result = Execute(new Command("give", player.Name,
-                    VersionManeger.GetIDFromIDoubleIndicatedElement(item), count));
-            }
-            else
-            {
-                result = Execute(new Command("give", player.Name,
-                    VersionManeger.GetIDFromIDoubleIndicatedElement(item), count, item.Meta));
-            }
         }
 
         private class ControlPluginSubManeger
