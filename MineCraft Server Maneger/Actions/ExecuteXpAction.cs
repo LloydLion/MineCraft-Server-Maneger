@@ -16,8 +16,8 @@ namespace MineCraft_Server_Maneger.Actions
         {
             var form = new ExecuteXpActionForm(ServerManeger.GlobalManeger.OnlinePlayers);
             form.ShowDialog();
-
             var r = form.Result;
+
             if (r == null) return;
 
             TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
