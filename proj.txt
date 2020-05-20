@@ -17,12 +17,10 @@
 			;description:
 			
 			
-			;git commit: null //...exemple commit..
+			;git commit: null
 			;released: false
 			
  			;test description:
-		
-			//very bad!!!!
 		
 			;todo:
 				;main:
@@ -41,5 +39,3 @@
 					- при нажатии Effect происходит краш(приложения) если на сервере нет игроков'
 					
 					;test:
-					
-					//- ...
