@@ -2,48 +2,45 @@
 
 	;description:
 		Server manager for minecraft
-		Min support version 1.7.2
-
-	;todo:
-		;alpha 0.1:
-			;main:
-				
-				- Add /inventory by plugin'
-				- Add /xp(Expirience), /clear(Clear), /inventory(See inventory) ButtonCommands'
-			
-			;bags:
-				;non test:
-					- при нажатии Effect происходит краш(приложения) если на сервере нет игроков'
-				;testing result:
-				
-					//non tested
-				
+		
+	;support:
+		;minimum version: 1.7.2
+		;server core type: craftBukkit
+		
 	;version ctrl:
-	
 		;description:
 		
-			folder for changelogs = ".\version\"
+		folder for changelogs = ".\version\"
 		
 		;alpha 0.1:
 		
 			;description:
 			
-				//Not Relesed
+			//Not Relesed
+			
+			;git commit: //...exemple commit..
 			
 			
-			;git commit:
-				//...exemple commit..
-			
-			;alpha test result:
-			
-				;description:
-			
-					//very bad!!!!
-			
-				;todo bags:
+			;test description:
+		
+			//very bad!!!!
+		
+			;todo:
+				;main:
+				
+				- Add /seeinventory by plugin'
+				
+				* Add 
+					+ /xp(Expirience)',
+					- /achivment(Achivments)',
+					- /seeinventory(See inventory) ButtonCommands'
+				
+				;bags:
+					
+					;common:
+					
+					- при нажатии Effect происходит краш(приложения) если на сервере нет игроков'
+					
+					;test:
 					
 					//- ...
-		
-		.
-		.
-		.

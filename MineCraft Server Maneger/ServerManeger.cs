@@ -184,6 +184,11 @@ namespace MineCraft_Server_Maneger
             return AvailableEffects.Where((s) => s.Name == name).Single();
         }
 
+        public void GiveXp(Player player, int amount, out string result, bool leveled = false)
+        {
+            result = Execute(new Command("xp", amount + (leveled ? "L" : ""), player.Name));    
+        }
+
         private class ControlPluginSubManeger
         {
             public ControlPluginSubManeger(ServerManeger maneger)

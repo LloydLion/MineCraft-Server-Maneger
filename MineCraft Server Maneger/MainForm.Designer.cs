@@ -51,7 +51,7 @@
             this.commandsExecuteSummonButton = new System.Windows.Forms.Button();
             this.commandsExecuteWeatherButton = new System.Windows.Forms.Button();
             this.commandsExecuteGiveButton = new System.Windows.Forms.Button();
-            this.commandsExecuteSetblockButton = new System.Windows.Forms.Button();
+            this.commandsExecuteXpButton = new System.Windows.Forms.Button();
             this.commandsExecuteGameruleButton = new System.Windows.Forms.Button();
             this.commandsExecuteSayButton = new System.Windows.Forms.Button();
             this.commandsExecuteClearButton = new System.Windows.Forms.Button();
@@ -269,7 +269,7 @@
             this.groupBox3.Controls.Add(this.commandsExecuteSummonButton);
             this.groupBox3.Controls.Add(this.commandsExecuteWeatherButton);
             this.groupBox3.Controls.Add(this.commandsExecuteGiveButton);
-            this.groupBox3.Controls.Add(this.commandsExecuteSetblockButton);
+            this.groupBox3.Controls.Add(this.commandsExecuteXpButton);
             this.groupBox3.Controls.Add(this.commandsExecuteGameruleButton);
             this.groupBox3.Controls.Add(this.commandsExecuteSayButton);
             this.groupBox3.Controls.Add(this.commandsExecuteClearButton);
@@ -309,14 +309,14 @@
             this.commandsExecuteGiveButton.Text = "Give";
             this.commandsExecuteGiveButton.UseVisualStyleBackColor = true;
             // 
-            // commandsExecuteSetblockButton
+            // commandsExecuteXpButton
             // 
-            this.commandsExecuteSetblockButton.Location = new System.Drawing.Point(312, 19);
-            this.commandsExecuteSetblockButton.Name = "commandsExecuteSetblockButton";
-            this.commandsExecuteSetblockButton.Size = new System.Drawing.Size(149, 23);
-            this.commandsExecuteSetblockButton.TabIndex = 6;
-            this.commandsExecuteSetblockButton.Text = "Setblock";
-            this.commandsExecuteSetblockButton.UseVisualStyleBackColor = true;
+            this.commandsExecuteXpButton.Location = new System.Drawing.Point(312, 19);
+            this.commandsExecuteXpButton.Name = "commandsExecuteXpButton";
+            this.commandsExecuteXpButton.Size = new System.Drawing.Size(149, 23);
+            this.commandsExecuteXpButton.TabIndex = 6;
+            this.commandsExecuteXpButton.Text = "Expirience";
+            this.commandsExecuteXpButton.UseVisualStyleBackColor = true;
             // 
             // commandsExecuteGameruleButton
             // 
@@ -559,7 +559,7 @@
         private System.Windows.Forms.Button commandsExecuteSummonButton;
         private System.Windows.Forms.Button commandsExecuteWeatherButton;
         private System.Windows.Forms.Button commandsExecuteGiveButton;
-        private System.Windows.Forms.Button commandsExecuteSetblockButton;
+        private System.Windows.Forms.Button commandsExecuteXpButton;
         private System.Windows.Forms.Button commandsExecuteGameruleButton;
         private System.Windows.Forms.Button commandsExecuteSayButton;
         private System.Windows.Forms.Button commandsExecuteClearButton;

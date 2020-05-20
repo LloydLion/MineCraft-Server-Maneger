@@ -54,6 +54,7 @@
     <Compile Include="Actions\ExecuteGameruleAction.cs" />
     <Compile Include="Actions\ExecuteSayAction.cs" />
     <Compile Include="Actions\ExecuteTimeAction.cs" />
+    <Compile Include="Actions\ExecuteXpAction.cs" />
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
@@ -80,6 +81,12 @@
     </Compile>
     <Compile Include="Forms\ExecuteTimeActionForm.Designer.cs">
       <DependentUpon>ExecuteTimeActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExecuteXpActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteXpActionForm.Designer.cs">
+      <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InstallServerForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteTimeActionForm.resx">
       <DependentUpon>ExecuteTimeActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExecuteXpActionForm.resx">
+      <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstallServerForm.resx">
       <DependentUpon>InstallServerForm.cs</DependentUpon>
