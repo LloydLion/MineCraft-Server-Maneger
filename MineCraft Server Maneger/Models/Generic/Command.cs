@@ -9,10 +9,10 @@ namespace MineCraft_Server_Maneger.Models.Generic
 {
     class Command : INamedObject
     {
-        public Command(string name, params string[] arguments)
+        public Command(string name, params object[] arguments)
         {
             Name = name;
-            Arguments = arguments;
+            Arguments = arguments.Select((q) => q.ToString()).ToArray();
         }
 
         public string Name { get; set; }

@@ -199,7 +199,7 @@ namespace MineCraft_Server_Maneger
 
 		public string GetIDFromIDoubleIndicatedElement(IDoubleIndicatedElement el)
 		{
-			if (el is EffectType || el is ItemInfo)
+			if (el is EffectType || el is ItemInfo || el is BlockInfo)
 			{
 				return Version >= new MCVersion("1.8") ? el.Id : el.NumId.ToString();
 			}

@@ -58,6 +58,7 @@
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
+    <Compile Include="Actions\ExecuteGiveAction.cs" />
     <Compile Include="Forms\ExecuteEffectActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +70,12 @@
     </Compile>
     <Compile Include="Forms\ExecuteGameruleActionForm.Designer.cs">
       <DependentUpon>ExecuteGameruleActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExecuteGiveActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteGiveActionForm.Designer.cs">
+      <DependentUpon>ExecuteGiveActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExecuteSayActionForm.cs">
       <SubType>Form</SubType>
@@ -133,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteGameruleActionForm.resx">
       <DependentUpon>ExecuteGameruleActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExecuteGiveActionForm.resx">
+      <DependentUpon>ExecuteGiveActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteSayActionForm.resx">
       <DependentUpon>ExecuteSayActionForm.cs</DependentUpon>
