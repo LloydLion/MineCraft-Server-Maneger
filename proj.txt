@@ -8,12 +8,12 @@
 		;alpha 0.1:
 			;main:
 				
-				
+				- Add /inventory by plugin'
+				- Add /xp(Expirience), /clear(Clear), /inventory(See inventory) ButtonCommands'
 			
 			;bags:
 				;non test:
-					- при нажатии Effect происходит краш(приложения) если 
-						на сервере нет игроков
+					- при нажатии Effect происходит краш(приложения) если на сервере нет игроков'
 				;testing result:
 				
 					//non tested
@@ -22,7 +22,7 @@
 	
 		;description:
 		
-			folder for changelogs - ".\version\"
+			folder for changelogs = ".\version\"
 		
 		;alpha 0.1:
 		
