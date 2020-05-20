@@ -16,12 +16,11 @@
 		
 			;description:
 			
-			//Not Relesed
 			
-			;git commit: //...exemple commit..
+			;git commit: null //...exemple commit..
+			;released: false
 			
-			
-			;test description:
+ 			;test description:
 		
 			//very bad!!!!
 		
