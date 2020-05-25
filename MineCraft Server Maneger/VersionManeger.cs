@@ -15,7 +15,8 @@ namespace MineCraft_Server_Maneger
 	{
 
 		public static string Path { get; } = Static.Path.binaries + "\\version";
-		public static (string gamerule, string effect) FilesNames { get; } = ("gamerule.json", "effect.json");
+		public static (string gamerule, string effect, string locate) FilesNames { get; } =
+			("gamerule.json", "effect.json", "locate.json");
 
 		public MCVersion Version { get; private set; }
 
@@ -47,13 +48,27 @@ namespace MineCraft_Server_Maneger
 			}
 		}
 
+		public Locate[] AvailableLocates
+		{
+			get
+			{
+				if (availableLocatesCache == null)
+				{
+					var g = LocatesDictionary.Where((s) => s.Key <= Version).OrderByDescending((q) => q.Key).ToArray();
+					availableLocatesCache = g[0].Value;
+				}
 
+				return availableLocatesCache;
+			}
+		}
 
 		private EffectType[] availableEffectCache;
 		private Gamerule[] availableGamerulesCache;
+		private Locate[] availableLocatesCache;
 
 		private static readonly Dictionary<MCVersion, Gamerule[]> GamerulesDictionary;
 		private static readonly Dictionary<MCVersion, EffectType[]> EffectsDictionary;
+		private static readonly Dictionary<MCVersion, Locate[]> LocatesDictionary;
 
 		public VersionManeger(MCVersion currentVersion)
 		{
@@ -75,23 +90,6 @@ namespace MineCraft_Server_Maneger
 				content = reader.ReadToEnd();
 
 				var r = JsonConvert.DeserializeObject<Dictionary<string, JSONGlobalDictionaryValue<SubStore.Gamerule>>>(content);
-				//var g = r.Select((s) => new KeyValuePair<MCVersion, JSONGlobalDictionaryValue>
-				//	(new MCVersion(s.Key), s.Value)).ToArray();
-
-				//for (int i = 0; i < g.Length; i++)
-				//{
-				//	KeyValuePair<MCVersion, JSONGlobalDictionaryValue<SubStore.Gamerule>>[] selected =
-				//	g.Where((s) => s.Key <= g[i].Key).ToArray();
-
-				//	List<SubStore.Gamerule> t = new List<SubStore.Gamerule>();
-				//	for (int j = 0; j < selected.Length; j++)
-				//	{
-				//		if (selected[j].Value.Add != null)
-				//			t.AddRange(selected[j].Value.Add);
-
-				//		if (selected[j].Value.Remove != null)
-				//			t.RemoveAll((s) => selected[j].Value.Remove.Contains(s.Name));
-				//	}
 
 
 				var a = JSONParse(r);
@@ -130,6 +128,8 @@ namespace MineCraft_Server_Maneger
 
 					GamerulesDictionary.Add(g[i].Key, gamerules);
 				}
+
+				file.Close();
 			}
 			#endregion
 
@@ -141,6 +141,19 @@ namespace MineCraft_Server_Maneger
 
 				var r = JsonConvert.DeserializeObject<Dictionary<string, JSONGlobalDictionaryValue<EffectType>>>(content);
 				EffectsDictionary = JSONParse(r);
+				file.Close();
+			}
+			#endregion
+
+			#region locations
+			{
+				file = File.Open(Path + "\\" + FilesNames.locate, FileMode.Open, FileAccess.Read);
+				reader = new StreamReader(file);
+				content = reader.ReadToEnd();
+
+				var r = JsonConvert.DeserializeObject<Dictionary<string, JSONGlobalDictionaryValue<Locate>>>(content);
+				LocatesDictionary = JSONParse(r);
+				file.Close();
 			}
 			#endregion
 		}
@@ -152,20 +165,40 @@ namespace MineCraft_Server_Maneger
 				public string Name { get; set; }
 				public string Type { get; set; }
 			}
-
-			//public class Effect : INamedObject
-			//{
-			//	public string Name { get; set; }
-			//	public string Id { get; set; }
-			//}
 		}
 
 		private class JSONGlobalDictionaryValue<T> where T : INamedObject
 		{
 			public T[] Add { get; set; }
 			public string[] Remove { get; set; }
+			public SmartEditJSONObject[] SmartEdit { get; set; }
 		}
 
+		private class SmartEditJSONObject
+		{
+			public string Selector { get; set; }
+			public FieldFilter FieldsFilter { get; set; }
+			public Function TransformFunction { get; set; }
+
+			public class FieldFilter
+			{
+				public string Name { get; set; }
+				public string[] Arguments { get; set; }
+			}
+
+			public class Function
+			{
+				public string Name { get; set; }
+				public string Type { get; set; }
+				public Argument[] Arguments { get; set; }
+
+				public class Argument
+				{
+					public string Type { get; set; }
+					public string Value { get; set; }
+				}
+			}
+		}
 
 		private static Dictionary<MCVersion, T[]> JSONParse<T>(Dictionary<string, JSONGlobalDictionaryValue<T>> r)
 			where T : INamedObject
@@ -189,6 +222,130 @@ namespace MineCraft_Server_Maneger
 
 					if (selected[j].Value.Remove != null)
 						t.RemoveAll((s) => selected[j].Value.Remove.Contains(s.Name));
+
+					if(selected[j].Value.SmartEdit != null)
+					{
+						var inst = selected[j].Value.SmartEdit;
+
+						for (int d = 0; d < inst.Length; d++)
+						{
+							Type ti = typeof(T);
+							T[] vals = null;
+
+							switch (inst[d].Selector)
+							{
+								case "All":
+								{
+									vals = t.ToArray();
+									break;
+								}
+
+								default:
+								{
+									throw new Exception("Error on JSON structure");
+								}
+							}
+
+							
+							SmartEditJSONObject.FieldFilter filter = inst[d].FieldsFilter;
+							PropertyInfo[] pis = null;
+
+							switch(filter.Name)
+							{
+								case "Type":
+								{
+									pis = ti.GetProperties().
+										Where((s) => filter.Arguments.Contains(s.PropertyType.FullName)).ToArray();
+									break;
+								}
+
+								case "Name":
+								{
+									pis = ti.GetProperties().
+										Where((s) => filter.Arguments.Contains(s.Name)).ToArray();
+									break;
+								}
+
+								default:
+								{
+									throw new Exception("Error on JSON structure");
+								}
+							}
+
+							SmartEditJSONObject.Function transform = inst[d].TransformFunction;
+							(object obj, Type ti)[] args = new (object obj, Type ti)[transform.Arguments.Length];
+
+
+							for (int f = 0; f < transform.Arguments.Length; f++)
+							{
+								var arg = transform.Arguments[f];
+								Type tii = Type.GetType(arg.Type);
+								Func<string, object> parseFunc = null;
+								
+								if (tii == null)
+								{
+									ti = typeof(string);
+									parseFunc = (s) => s;
+								}
+								else
+								{
+									var mi = tii.GetMethod("Parse",
+										new Type[] { typeof(string) });
+									if (mi == null) throw new Exception("Error on JSON structure");
+									else
+									{
+										if (!(mi.Attributes.HasFlag(MethodAttributes.Static) ||
+											 mi.Attributes.HasFlag(MethodAttributes.Public)))
+											throw new Exception("Error on JSON structure");
+									}
+
+									parseFunc = (s) => mi.Invoke(null, new object[] { s });
+								}
+
+								args[f] = (parseFunc(arg.Value), tii);
+							}
+
+
+							MethodInfo[] miis = new MethodInfo[pis.Length];
+
+							switch (transform.Type)
+							{
+								case "Instance":
+								{
+									for (int a = 0; a < pis.Length; a++)
+									{
+										miis[a] = pis[a].PropertyType.GetMethod(transform.Name,
+											args.Select((s) => s.ti).ToArray());
+
+										if (miis[a] == null) throw new Exception("Error on JSON structure");
+										else
+										{
+											if(!(miis[a].Attributes.HasFlag(MethodAttributes.Public)
+												|| !miis[a].Attributes.HasFlag(MethodAttributes.Static)))
+												throw new Exception("Error on JSON structure");
+										}
+									}
+
+									
+									break;
+								}
+
+								default:
+								{
+									throw new Exception("Error on JSON structure");
+								}	
+							}
+
+							for (int a = 0; a < pis.Length; a++)
+							{
+								for (int s = 0; s < vals.Length; s++)
+								{
+									pis[a].SetValue(vals[s], miis[a].Invoke(pis[a].GetValue(vals[s]),
+										args.Select((q) => q.obj).ToArray()));
+								}
+							}
+						}
+					}
 				}
 
 				result.Add(g[i].Key, t.ToArray());

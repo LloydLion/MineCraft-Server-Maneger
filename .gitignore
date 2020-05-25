@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Project difinition
+Minecraft Server Maneger/Core/data
+Minecraft Server Maneger/Core/server
+Minecraft Server Maneger/Core/world
+
 # User-specific files
 *.rsuser
 *.suo

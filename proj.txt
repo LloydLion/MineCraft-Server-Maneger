@@ -25,12 +25,10 @@
 			;todo:
 				;main:
 				
-				- Add /seeinventory by plugin'
-				
 				* Add 
 					+ /xp(Expirience)',
-					- /achivment(Achivments)',
-					- /seeinventory(See inventory) ButtonCommands'
+					- /locate(Locate)',
+					- /difficulty(Difficulty) ButtonCommands'
 				
 				;bags:
 					
