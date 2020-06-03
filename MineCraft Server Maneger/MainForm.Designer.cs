@@ -50,7 +50,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.commandsExecuteSummonButton = new System.Windows.Forms.Button();
             this.commandsExecuteWeatherButton = new System.Windows.Forms.Button();
-            this.commandsExecuteGiveButton = new System.Windows.Forms.Button();
+            this.commandsExecuteLocateButton = new System.Windows.Forms.Button();
             this.commandsExecuteXpButton = new System.Windows.Forms.Button();
             this.commandsExecuteGameruleButton = new System.Windows.Forms.Button();
             this.commandsExecuteSayButton = new System.Windows.Forms.Button();
@@ -268,7 +268,7 @@
             // 
             this.groupBox3.Controls.Add(this.commandsExecuteSummonButton);
             this.groupBox3.Controls.Add(this.commandsExecuteWeatherButton);
-            this.groupBox3.Controls.Add(this.commandsExecuteGiveButton);
+            this.groupBox3.Controls.Add(this.commandsExecuteLocateButton);
             this.groupBox3.Controls.Add(this.commandsExecuteXpButton);
             this.groupBox3.Controls.Add(this.commandsExecuteGameruleButton);
             this.groupBox3.Controls.Add(this.commandsExecuteSayButton);
@@ -300,14 +300,14 @@
             this.commandsExecuteWeatherButton.Text = "Weather";
             this.commandsExecuteWeatherButton.UseVisualStyleBackColor = true;
             // 
-            // commandsExecuteGiveButton
+            // commandsExecuteLocateButton
             // 
-            this.commandsExecuteGiveButton.Location = new System.Drawing.Point(312, 48);
-            this.commandsExecuteGiveButton.Name = "commandsExecuteGiveButton";
-            this.commandsExecuteGiveButton.Size = new System.Drawing.Size(149, 23);
-            this.commandsExecuteGiveButton.TabIndex = 7;
-            this.commandsExecuteGiveButton.Text = "Give";
-            this.commandsExecuteGiveButton.UseVisualStyleBackColor = true;
+            this.commandsExecuteLocateButton.Location = new System.Drawing.Point(312, 48);
+            this.commandsExecuteLocateButton.Name = "commandsExecuteLocateButton";
+            this.commandsExecuteLocateButton.Size = new System.Drawing.Size(149, 23);
+            this.commandsExecuteLocateButton.TabIndex = 7;
+            this.commandsExecuteLocateButton.Text = "Locate";
+            this.commandsExecuteLocateButton.UseVisualStyleBackColor = true;
             // 
             // commandsExecuteXpButton
             // 
@@ -558,7 +558,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button commandsExecuteSummonButton;
         private System.Windows.Forms.Button commandsExecuteWeatherButton;
-        private System.Windows.Forms.Button commandsExecuteGiveButton;
+        private System.Windows.Forms.Button commandsExecuteLocateButton;
         private System.Windows.Forms.Button commandsExecuteXpButton;
         private System.Windows.Forms.Button commandsExecuteGameruleButton;
         private System.Windows.Forms.Button commandsExecuteSayButton;

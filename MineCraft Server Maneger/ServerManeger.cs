@@ -189,6 +189,11 @@ namespace MineCraft_Server_Maneger
             result = Execute(new Command("xp", amount + (leveled ? "L" : ""), player.Name));    
         }
 
+        public (float x, float z) Locate(Locate locate)
+        {
+            return VersionManeger.ParseLocateCommandOutput(Execute(new Command("locate", locate.Id)));
+        }
+
         private class ControlPluginSubManeger
         {
             public ControlPluginSubManeger(ServerManeger maneger)

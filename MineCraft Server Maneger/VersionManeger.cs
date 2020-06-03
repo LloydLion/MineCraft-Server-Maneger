@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace MineCraft_Server_Maneger
 {
@@ -352,6 +353,13 @@ namespace MineCraft_Server_Maneger
 			}
 
 			return result;
+		}
+
+		public (float x, float z) ParseLocateCommandOutput(string v)
+		{
+			Regex ex = new Regex("\\d+");
+			var er = ex.Matches(v);
+			return (float.Parse(er[0].Value), float.Parse(er[1].Value));
 		}
 
 		public string GetIDFromIDoubleIndicatedElement(IDoubleIndicatedElement el)

@@ -52,6 +52,7 @@
     <Compile Include="ActionBase.cs" />
     <Compile Include="Actions\ExecuteEffectAction.cs" />
     <Compile Include="Actions\ExecuteGameruleAction.cs" />
+    <Compile Include="Actions\ExecuteLocateAction.cs" />
     <Compile Include="Actions\ExecuteSayAction.cs" />
     <Compile Include="Actions\ExecuteTimeAction.cs" />
     <Compile Include="Actions\ExecuteXpAction.cs" />
@@ -69,6 +70,12 @@
     </Compile>
     <Compile Include="Forms\ExecuteGameruleActionForm.Designer.cs">
       <DependentUpon>ExecuteGameruleActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExecuteLocateActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteLocateActionForm.Designer.cs">
+      <DependentUpon>ExecuteLocateActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExecuteSayActionForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +114,7 @@
     <Compile Include="Models\Generic\EffectType.cs" />
     <Compile Include="Models\Generic\Entity.cs" />
     <Compile Include="Models\Generic\Gamerule.cs" />
+    <Compile Include="Models\Generic\Locate.cs" />
     <Compile Include="Models\Generic\MCVersion.cs" />
     <Compile Include="Interfaces\INamedObject.cs" />
     <Compile Include="Models\Generic\Player.cs" />
@@ -131,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteGameruleActionForm.resx">
       <DependentUpon>ExecuteGameruleActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExecuteLocateActionForm.resx">
+      <DependentUpon>ExecuteLocateActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteSayActionForm.resx">
       <DependentUpon>ExecuteSayActionForm.cs</DependentUpon>
@@ -159,6 +170,64 @@
     <EmbeddedResource Include="VersionSelectionForm.resx">
       <DependentUpon>VersionSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Core\bin\links.json" />
+    <None Include="Core\bin\version\effect.json" />
+    <None Include="Core\bin\version\gamerule.json" />
+    <None Include="Core\bin\version\locate.json" />
+    <None Include="Core\data\banned-ips.json" />
+    <None Include="Core\data\banned-players.json" />
+    <None Include="Core\data\bukkit.yml" />
+    <None Include="Core\data\commands.yml" />
+    <None Include="Core\data\help.yml" />
+    <None Include="Core\data\logs\2020-04-09-1.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-2.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-3.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-4.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-5.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-6.log.gz" />
+    <None Include="Core\data\logs\2020-04-09-7.log.gz" />
+    <None Include="Core\data\logs\2020-04-10-1.log.gz" />
+    <None Include="Core\data\logs\2020-04-10-2.log.gz" />
+    <None Include="Core\data\logs\2020-04-10-3.log.gz" />
+    <None Include="Core\data\logs\latest.log" />
+    <None Include="Core\data\ops.json" />
+    <None Include="Core\data\permissions.yml" />
+    <None Include="Core\data\server.properties" />
+    <None Include="Core\data\usercache.json" />
+    <None Include="Core\data\whitelist.json" />
+    <None Include="Core\data\world\datapacks\bukkit\pack.mcmeta" />
+    <None Include="Core\data\world\data\raids.dat" />
+    <None Include="Core\data\world\level.dat" />
+    <None Include="Core\data\world\region\r.-1.-1.mca" />
+    <None Include="Core\data\world\region\r.-1.0.mca" />
+    <None Include="Core\data\world\region\r.0.-1.mca" />
+    <None Include="Core\data\world\region\r.0.0.mca" />
+    <None Include="Core\data\world\session.lock" />
+    <None Include="Core\data\world\uid.dat" />
+    <None Include="Core\data\world_nether\DIM-1\data\raids_nether.dat" />
+    <None Include="Core\data\world_nether\DIM-1\region\r.-1.-1.mca" />
+    <None Include="Core\data\world_nether\DIM-1\region\r.-1.0.mca" />
+    <None Include="Core\data\world_nether\DIM-1\region\r.0.-1.mca" />
+    <None Include="Core\data\world_nether\DIM-1\region\r.0.0.mca" />
+    <None Include="Core\data\world_nether\level.dat" />
+    <None Include="Core\data\world_nether\session.lock" />
+    <None Include="Core\data\world_nether\uid.dat" />
+    <None Include="Core\data\world_the_end\DIM1\data\raids_end.dat" />
+    <None Include="Core\data\world_the_end\DIM1\region\r.-1.-1.mca" />
+    <None Include="Core\data\world_the_end\DIM1\region\r.-1.0.mca" />
+    <None Include="Core\data\world_the_end\DIM1\region\r.0.-1.mca" />
+    <None Include="Core\data\world_the_end\DIM1\region\r.0.0.mca" />
+    <None Include="Core\data\world_the_end\level.dat" />
+    <None Include="Core\data\world_the_end\session.lock" />
+    <None Include="Core\data\world_the_end\uid.dat" />
+    <None Include="Core\server\1.12.2" />
+    <None Include="Core\server\1.12.2.meta" />
+    <None Include="Core\server\1.14.4" />
+    <None Include="Core\server\1.14.4.meta" />
+    <None Include="Core\server\1.15.2" />
+    <None Include="Core\server\1.15.2.meta" />
+    <None Include="Core\server\1.9.4" />
+    <None Include="Core\server\1.9.4.meta" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -174,7 +243,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\data\plugins\" />
+    <Folder Include="Core\data\world\playerdata\" />
+    <Folder Include="Core\data\world_nether\playerdata\" />
+    <Folder Include="Core\data\world_the_end\playerdata\" />
+    <Folder Include="Core\world\" />
     <Folder Include="SubClasses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\data\craftbukkit-1.15.2.jar" />
+    <Content Include="Core\data\eula.txt" />
+    <Content Include="Core\server\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
