@@ -1,4 +1,5 @@
-﻿using MineCraft_Server_Maneger.Interfaces;
+﻿using StandardLibrary.Interfaces;
+using StandardLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Models.Generic
 {
-    class Gamerule<T> : INamedObject
+    class Gamerule<T> : Model, IPrivateNamedObject
     {
         public Gamerule(string name, Func<string, T> parseFunction)
         {
@@ -15,9 +16,13 @@ namespace MineCraft_Server_Maneger.Models.Generic
             ParseFunction = parseFunction;
         }
 
-        public string Name { get; set; }
-        public Func<string, T> ParseFunction { get; private set; }
-        
+        public string Name { get; }
+        public Func<string, T> ParseFunction { get; }
+
+        public override object Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class Gamerule : Gamerule<object>
@@ -28,7 +33,7 @@ namespace MineCraft_Server_Maneger.Models.Generic
             GameruleType = gameruleType;
         }
 
-        public Type GameruleType { get; private set; }
+        public Type GameruleType { get; }
 
 
         public static Gamerule TypeDownCast<T>(Gamerule<T> obj)

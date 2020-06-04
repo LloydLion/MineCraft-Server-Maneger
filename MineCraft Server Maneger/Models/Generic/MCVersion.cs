@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StandardLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Models.Generic
 {
-    class MCVersion : IComparable
+    class MCVersion : Model, IComparable
     {
         private int[] split;
 
@@ -68,6 +69,11 @@ namespace MineCraft_Server_Maneger.Models.Generic
             }
             else
                 throw new ArgumentException("Object is not a Temperature");
+        }
+
+        public override object Clone()
+        {
+            return new MCVersion(Version, split != null);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace MineCraft_Server_Maneger.Models
             Name = string.Format(Name, args);
             Path = string.Format(Path, args);
             GameVersion.Version = string.Format(GameVersion.Version, args);
-            CoreType.CoreName = string.Format(CoreType.CoreName, args);
+            CoreType.Name = string.Format(CoreType.Name, args);
 
             var p = CoreType.Paths;
 

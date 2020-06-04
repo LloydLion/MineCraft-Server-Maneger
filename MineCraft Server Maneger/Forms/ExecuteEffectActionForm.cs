@@ -41,21 +41,18 @@ namespace MineCraft_Server_Maneger.Forms
         {
             Result = new ExecuteEffectActionFormResult
             {
-                Effect = new Effect(),
                 Entities = ServerManeger.GlobalManeger.GetEntitiesBySelector(playersComboBox.Text)
             };
 
             if (effectComboBox.Text != "Clear all effects")
             {
-                Result.Effect.EffectType = 
-                    ServerManeger.GlobalManeger.GetEffectTypeByName(effectComboBox.Text);
-                Result.Effect.HideParticiples = hideParticlesCheckBox.Checked;
-                Result.Effect.Power = int.Parse(powerTextBox.Text);
-                Result.Effect.Time = int.Parse(timeTextBox.Text);
+                Result.Effect = new Effect(int.Parse(powerTextBox.Text), int.Parse(timeTextBox.Text),
+                    ServerManeger.GlobalManeger.GetEffectTypeByName(effectComboBox.Text),
+                    hideParticlesCheckBox.Checked, false);
             }
             else
             {
-                Result.Effect.ClearEffects = true;
+                Result.Effect = new Effect(0, 0, null, false, true);
             }
 
             Close();

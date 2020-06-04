@@ -1,13 +1,14 @@
-﻿using MineCraft_Server_Maneger.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StandardLibrary.Interfaces;
+using StandardLibrary.Models;
 
 namespace MineCraft_Server_Maneger.Models.Generic
 {
-    class Command : INamedObject
+    class Command : Model
     {
         public Command(string name, params object[] arguments)
         {
@@ -15,8 +16,14 @@ namespace MineCraft_Server_Maneger.Models.Generic
             Arguments = arguments.Select((q) => q.ToString()).ToArray();
         }
 
-        public string Name { get; set; }
-        public string[] Arguments { get; set; }
+        public string Name { get; }
+        public string[] Arguments { get; }
+
+
+        public override object Clone()
+        {
+            return new Command(Name, Arguments);
+        }
 
         public override string ToString()
         {

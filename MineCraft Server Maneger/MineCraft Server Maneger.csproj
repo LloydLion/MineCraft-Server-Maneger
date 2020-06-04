@@ -36,6 +36,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Standard Library">
+      <HintPath>..\libs\Standard Library.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -101,8 +104,8 @@
     <Compile Include="InstallServerForm.Designer.cs">
       <DependentUpon>InstallServerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IDoubleIndicatedElement.cs" />
-    <Compile Include="Interfaces\IIndicatedElement.cs" />
+    <Compile Include="Interfaces\IMCDoubleIndicatedObject.cs" />
+    <Compile Include="Interfaces\IMCIndicatedObject.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,9 +119,8 @@
     <Compile Include="Models\Generic\Gamerule.cs" />
     <Compile Include="Models\Generic\Locate.cs" />
     <Compile Include="Models\Generic\MCVersion.cs" />
-    <Compile Include="Interfaces\INamedObject.cs" />
     <Compile Include="Models\Generic\Player.cs" />
-    <Compile Include="Models\Generic\ServerCoreType.cs" />
+    <Compile Include="Models\ServerCoreType.cs" />
     <Compile Include="Models\ServerDownloadInfo.cs" />
     <Compile Include="Models\ServerInfo.cs" />
     <Compile Include="Program.cs" />

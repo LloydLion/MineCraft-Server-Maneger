@@ -1,5 +1,4 @@
 ﻿using MineCraft_Server_Maneger.Models.Generic;
-using MineCraft_Server_Maneger.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using StandardLibrary.Interfaces;
+using MineCraft_Server_Maneger.Interfaces;
 
 namespace MineCraft_Server_Maneger
 {
@@ -161,14 +162,14 @@ namespace MineCraft_Server_Maneger
 
 		private static class SubStore
 		{
-			public class Gamerule : INamedObject
+			public class Gamerule : IPrivateNamedObject
 			{
 				public string Name { get; set; }
 				public string Type { get; set; }
 			}
 		}
 
-		private class JSONGlobalDictionaryValue<T> where T : INamedObject
+		private class JSONGlobalDictionaryValue<T> where T : IPrivateNamedObject
 		{
 			public T[] Add { get; set; }
 			public string[] Remove { get; set; }
@@ -202,7 +203,7 @@ namespace MineCraft_Server_Maneger
 		}
 
 		private static Dictionary<MCVersion, T[]> JSONParse<T>(Dictionary<string, JSONGlobalDictionaryValue<T>> r)
-			where T : INamedObject
+			where T : IPrivateNamedObject
 		{
 			Dictionary<MCVersion, T[]> result = new Dictionary<MCVersion, T[]>();
 
@@ -362,11 +363,11 @@ namespace MineCraft_Server_Maneger
 			return (float.Parse(er[0].Value), float.Parse(er[1].Value));
 		}
 
-		public string GetIDFromIDoubleIndicatedElement(IDoubleIndicatedElement el)
+		public string GetIDFromIDoubleIndicatedElement(IMCDoubleIndicatedObject el)
 		{
 			if (el is EffectType)
 			{
-				return Version >= new MCVersion("1.8") ? el.Id : el.NumId.ToString();
+				return Version >= new MCVersion("1.8") ? el.MCStringId : el.MCId.ToString();
 			}
 			else
 				throw new ArgumentException("el isn't has valid type!", nameof(el));

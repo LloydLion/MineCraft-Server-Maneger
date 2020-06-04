@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Interfaces
 {
-    interface IDoubleIndicatedElement : IIndicatedElement
+    interface IMCIndicatedObject
     {
-        int NumId { get; set; }
+        string MCStringId { get; }
     }
 }

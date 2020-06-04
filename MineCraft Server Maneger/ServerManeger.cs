@@ -39,11 +39,8 @@ namespace MineCraft_Server_Maneger
                     char[] a = new char[i.Length - 1];
                     Array.Copy(i.ToArray(), 1, a, 0, a.Length);
                     string f = new string(a);
-                    var player = new Player
-                    {
-                        Name = f,
-                        Id = "minecraft:player"
-                    };
+
+                    var player = new Player(f);
 
                     int d = int.Parse(new string(i[0], 1));
 
