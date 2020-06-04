@@ -46,7 +46,7 @@ namespace MineCraft_Server_Maneger.Forms
 
             if (effectComboBox.Text != "Clear all effects")
             {
-                Result.Effect = new Effect(int.Parse(powerTextBox.Text), int.Parse(timeTextBox.Text),
+                Result.Effect = new Effect(int.Parse(timeTextBox.Text), int.Parse(powerTextBox.Text),
                     ServerManeger.GlobalManeger.GetEffectTypeByName(effectComboBox.Text),
                     hideParticlesCheckBox.Checked, false);
             }
