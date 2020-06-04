@@ -18,7 +18,6 @@ namespace MineCraft_Server_Maneger
         private StreamWriter Writer { get => serverProcess.StandardInput; }
         public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
-
         public VersionManeger VersionManeger { get; }
 
         #region VersionManegerProperties
@@ -98,6 +97,11 @@ namespace MineCraft_Server_Maneger
         public void ChangeWeather(WeatherStade weather, out string er)
         {
             er = Execute(new Command("weather", weather.ToString().ToLower()));
+        }
+
+        public void ChangeDifficulty(Difficulty difficulty, out string er)
+        {
+            er = Execute(new Command("difficulty", difficulty.ToString().ToLower()));
         }
 
         public string Execute(Command command)

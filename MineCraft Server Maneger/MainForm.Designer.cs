@@ -48,7 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.commandsOutputTextBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.commandsExecuteSummonButton = new System.Windows.Forms.Button();
+            this.commandsExecuteDifficultyButton = new System.Windows.Forms.Button();
             this.commandsExecuteWeatherButton = new System.Windows.Forms.Button();
             this.commandsExecuteLocateButton = new System.Windows.Forms.Button();
             this.commandsExecuteXpButton = new System.Windows.Forms.Button();
@@ -266,7 +266,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.commandsExecuteSummonButton);
+            this.groupBox3.Controls.Add(this.commandsExecuteDifficultyButton);
             this.groupBox3.Controls.Add(this.commandsExecuteWeatherButton);
             this.groupBox3.Controls.Add(this.commandsExecuteLocateButton);
             this.groupBox3.Controls.Add(this.commandsExecuteXpButton);
@@ -282,14 +282,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Commands";
             // 
-            // commandsExecuteSummonButton
+            // commandsExecuteDifficultyButton
             // 
-            this.commandsExecuteSummonButton.Location = new System.Drawing.Point(312, 77);
-            this.commandsExecuteSummonButton.Name = "commandsExecuteSummonButton";
-            this.commandsExecuteSummonButton.Size = new System.Drawing.Size(149, 23);
-            this.commandsExecuteSummonButton.TabIndex = 8;
-            this.commandsExecuteSummonButton.Text = "Summon";
-            this.commandsExecuteSummonButton.UseVisualStyleBackColor = true;
+            this.commandsExecuteDifficultyButton.Location = new System.Drawing.Point(312, 77);
+            this.commandsExecuteDifficultyButton.Name = "commandsExecuteDifficultyButton";
+            this.commandsExecuteDifficultyButton.Size = new System.Drawing.Size(149, 23);
+            this.commandsExecuteDifficultyButton.TabIndex = 8;
+            this.commandsExecuteDifficultyButton.Text = "Difficulty";
+            this.commandsExecuteDifficultyButton.UseVisualStyleBackColor = true;
             // 
             // commandsExecuteWeatherButton
             // 
@@ -556,7 +556,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox commandsOutputTextBox;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button commandsExecuteSummonButton;
+        private System.Windows.Forms.Button commandsExecuteDifficultyButton;
         private System.Windows.Forms.Button commandsExecuteWeatherButton;
         private System.Windows.Forms.Button commandsExecuteLocateButton;
         private System.Windows.Forms.Button commandsExecuteXpButton;

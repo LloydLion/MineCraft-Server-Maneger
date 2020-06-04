@@ -12,28 +12,28 @@ using System.Windows.Forms;
 
 namespace MineCraft_Server_Maneger.Forms
 {
-    partial class ExecuteWeatherActionForm : Form
+    partial class ExecuteDifficultyActionForm : Form
     {
-        public class ExecuteWeatherActionFormResult
+        public class ExecuteDifficultyActionFormResult
         { 
-            public WeatherStade WeatherStade { get; set; }
+            public Difficulty Difficulty { get; set; }
         
         }
 
-        public ExecuteWeatherActionFormResult Result { get; private set; }
+        public ExecuteDifficultyActionFormResult Result { get; private set; }
 
-        public ExecuteWeatherActionForm()
+        public ExecuteDifficultyActionForm()
         {
             InitializeComponent();
 
-            comboBox.Items.AddRange(Enum.GetNames(typeof(WeatherStade)).Cast<object>().ToArray());
+            comboBox.Items.AddRange(Enum.GetNames(typeof(Difficulty)).Cast<object>().ToArray());
         }
 
         private void Button_Click(object sender, EventArgs e)
         {
-            Result = new ExecuteWeatherActionFormResult
+            Result = new ExecuteDifficultyActionFormResult
             {
-                WeatherStade = (WeatherStade)Enum.Parse(typeof(WeatherStade), comboBox.Text)
+                Difficulty = (Difficulty)Enum.Parse(typeof(Difficulty), comboBox.Text)
             };
 
             this.Close();
