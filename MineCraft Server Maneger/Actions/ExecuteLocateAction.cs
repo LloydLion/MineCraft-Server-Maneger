@@ -1,4 +1,5 @@
 ﻿using MineCraft_Server_Maneger.Forms;
+using MineCraft_Server_Maneger.Models.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace MineCraft_Server_Maneger.Actions
             TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
             (float x, float z) cords = ServerManeger.GlobalManeger.Locate(r.Locate);
             UIManeger.GlobalManeger.UpdateCommandOutput($"{cords.x} [y?] {cords.z}", now);
+        }
+
+        public override bool IsEnabled()
+        {
+            return base.IsEnabled() && ServerManeger.GlobalManeger.MCVersion >= new MCVersion("1.11");
         }
     }
 }

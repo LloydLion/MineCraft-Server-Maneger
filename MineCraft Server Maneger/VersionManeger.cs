@@ -162,10 +162,15 @@ namespace MineCraft_Server_Maneger
 
 		private static class SubStore
 		{
-			public class Gamerule : IPrivateNamedObject
+			public class Gamerule : IPrivateNamedObject, ICloneable
 			{
 				public string Name { get; set; }
 				public string Type { get; set; }
+
+				public object Clone()
+				{
+					return new Gamerule() { Name = Name, Type = Type };
+				}
 			}
 		}
 
@@ -203,7 +208,7 @@ namespace MineCraft_Server_Maneger
 		}
 
 		private static Dictionary<MCVersion, T[]> JSONParse<T>(Dictionary<string, JSONGlobalDictionaryValue<T>> r)
-			where T : IPrivateNamedObject
+			where T : IPrivateNamedObject, ICloneable
 		{
 			Dictionary<MCVersion, T[]> result = new Dictionary<MCVersion, T[]>();
 
@@ -233,12 +238,16 @@ namespace MineCraft_Server_Maneger
 						{
 							Type ti = typeof(T);
 							T[] vals = null;
+							int[] selIndexes;
 
 							switch (inst[d].Selector)
 							{
 								case "All":
 								{
 									vals = t.ToArray();
+									selIndexes = new int[vals.Length];
+									selIndexes = selIndexes.Select((s, l) => l).ToArray();
+
 									break;
 								}
 
@@ -248,6 +257,7 @@ namespace MineCraft_Server_Maneger
 								}
 							}
 
+							vals = vals.Select((s) => (T)s.Clone()).ToArray();
 							
 							SmartEditJSONObject.FieldFilter filter = inst[d].FieldsFilter;
 							PropertyInfo[] pis = null;
@@ -345,6 +355,11 @@ namespace MineCraft_Server_Maneger
 									pis[a].SetValue(vals[s], miis[a].Invoke(pis[a].GetValue(vals[s]),
 										args.Select((q) => q.obj).ToArray()));
 								}
+							}
+
+							for (int l = 0; l < selIndexes.Length; l++)
+							{
+								t[l] = vals[l];
 							}
 						}
 					}
