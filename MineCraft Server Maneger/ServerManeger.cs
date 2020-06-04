@@ -18,6 +18,7 @@ namespace MineCraft_Server_Maneger
         private StreamWriter Writer { get => serverProcess.StandardInput; }
         public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
+
         public VersionManeger VersionManeger { get; }
 
         #region VersionManegerProperties
@@ -87,6 +88,11 @@ namespace MineCraft_Server_Maneger
         {
             ExecutePrimary(new Command("stop"));
             serverProcess.WaitForExit();
+        }
+
+        public void Clear(Player player, out string er)
+        {
+            er = Execute(new Command("clear", player.Name));
         }
 
         public string Execute(Command command)

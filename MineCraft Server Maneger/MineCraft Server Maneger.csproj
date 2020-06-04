@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
+    <Compile Include="Actions\ExecuteClearAction.cs" />
     <Compile Include="Actions\ExecuteEffectAction.cs" />
     <Compile Include="Actions\ExecuteGameruleAction.cs" />
     <Compile Include="Actions\ExecuteLocateAction.cs" />
@@ -62,6 +63,12 @@
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
+    <Compile Include="Forms\ExecuteClearActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteClearActionForm.Designer.cs">
+      <DependentUpon>ExecuteClearActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExecuteEffectActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +143,9 @@
     <Compile Include="VersionSelectionForm.Designer.cs">
       <DependentUpon>VersionSelectionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\ExecuteClearActionForm.resx">
+      <DependentUpon>ExecuteClearActionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteEffectActionForm.resx">
       <DependentUpon>ExecuteEffectActionForm.cs</DependentUpon>
     </EmbeddedResource>
