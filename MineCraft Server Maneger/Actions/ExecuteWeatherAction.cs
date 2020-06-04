@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger.Actions
 {
-    class ExecuteClearAction : ActionBase
+    class ExecuteWeatherAction : ActionBase
     {
-        public override string ActionName => "commands.execute_clear";
+        public override string ActionName => "commands.execute_weather";
 
         public override void Handler()
         {
-            var form = new ExecuteClearActionForm(ServerManeger.GlobalManeger.OnlinePlayers);
+            var form = new ExecuteWeatherActionForm();
             form.ShowDialog();
             var r = form.Result;
             if (r == null) return;
 
             TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
-            ServerManeger.GlobalManeger.ClearPlayerInventory(r.Player, out var er);
+            ServerManeger.GlobalManeger.ChangeWeather(r.WeatherStade, out var er);
             UIManeger.GlobalManeger.UpdateCommandOutput(er, now);
         }
     }

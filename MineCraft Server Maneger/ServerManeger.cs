@@ -90,9 +90,14 @@ namespace MineCraft_Server_Maneger
             serverProcess.WaitForExit();
         }
 
-        public void Clear(Player player, out string er)
+        public void ClearPlayerInventory(Player player, out string er)
         {
             er = Execute(new Command("clear", player.Name));
+        }
+
+        public void ChangeWeather(WeatherStade weather, out string er)
+        {
+            er = Execute(new Command("weather", weather.ToString().ToLower()));
         }
 
         public string Execute(Command command)

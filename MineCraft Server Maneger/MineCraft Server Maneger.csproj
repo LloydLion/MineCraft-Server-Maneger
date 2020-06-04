@@ -59,10 +59,17 @@
     <Compile Include="Actions\ExecuteLocateAction.cs" />
     <Compile Include="Actions\ExecuteSayAction.cs" />
     <Compile Include="Actions\ExecuteTimeAction.cs" />
+    <Compile Include="Actions\ExecuteWeatherAction.cs" />
     <Compile Include="Actions\ExecuteXpAction.cs" />
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
+    <Compile Include="Forms\ExecuteWeatherActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExecuteWeatherActionForm.Designer.cs">
+      <DependentUpon>ExecuteWeatherActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExecuteClearActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +134,7 @@
     <Compile Include="Models\Generic\Locate.cs" />
     <Compile Include="Models\Generic\MCVersion.cs" />
     <Compile Include="Models\Generic\Player.cs" />
+    <Compile Include="Models\Generic\WeatherStade.cs" />
     <Compile Include="Models\ServerCoreType.cs" />
     <Compile Include="Models\ServerDownloadInfo.cs" />
     <Compile Include="Models\ServerInfo.cs" />
@@ -143,6 +151,9 @@
     <Compile Include="VersionSelectionForm.Designer.cs">
       <DependentUpon>VersionSelectionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\ExecuteWeatherActionForm.resx">
+      <DependentUpon>ExecuteWeatherActionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteClearActionForm.resx">
       <DependentUpon>ExecuteClearActionForm.cs</DependentUpon>
     </EmbeddedResource>
