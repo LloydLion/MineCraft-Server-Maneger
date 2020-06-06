@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.filtratedPlayersListView = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.otherResetSettingsButton = new System.Windows.Forms.Button();
             this.otherOpenServerDirectoryButton = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -499,6 +501,12 @@
             this.otherOpenServerDirectoryButton.Text = "Open Server Directory";
             this.otherOpenServerDirectoryButton.UseVisualStyleBackColor = true;
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 10000;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,6 +531,7 @@
             this.Name = "MainForm";
             this.Text = "Server Maneger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -579,6 +588,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button otherResetSettingsButton;
         private System.Windows.Forms.Button otherOpenServerDirectoryButton;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

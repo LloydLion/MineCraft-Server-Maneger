@@ -26,7 +26,7 @@ namespace MineCraft_Server_Maneger
 
         #endregion
 
-        private Player[] Players 
+        public Player[] AllPlayers 
         { 
             get 
             {
@@ -36,18 +36,17 @@ namespace MineCraft_Server_Maneger
 
                 foreach (var i in p)
                 {
-                    char[] a = new char[i.Length - 1];
-                    Array.Copy(i.ToArray(), 1, a, 0, a.Length);
+                    char[] a = new char[i.Length - 4];
+                    Array.Copy(i.ToArray(), 4, a, 0, a.Length);
                     string f = new string(a);
 
                     var player = new Player(f);
 
-                    int d = int.Parse(new string(i[0], 1));
 
-                    if ((d & 1) != 0) player.Tags.Add(Player.PlayerTag.Banned);
-                    if ((d & 2) != 0) player.Tags.Add(Player.PlayerTag.Whitelisted);
-                    if ((d & 4) != 0) player.Tags.Add(Player.PlayerTag.Operator);
-                    if ((d & 8) != 0) player.Tags.Add(Player.PlayerTag.Online);
+                    if (i[0] == '1') player.Tags.Add(Player.PlayerTag.Banned);
+                    if (i[1] == '1') player.Tags.Add(Player.PlayerTag.Online);
+                    if (i[2] == '1') player.Tags.Add(Player.PlayerTag.Operator);
+                    if (i[3] == '1') player.Tags.Add(Player.PlayerTag.Whitelisted);
 
                     list.Add(player);
                 }
@@ -78,9 +77,17 @@ namespace MineCraft_Server_Maneger
             return Execute(new Command("time", "add", a.ToString()));
         }
 
-        public void Start()
+        public Task Start()
         {
             serverProcess.Start();
+
+            return Task.Run(() =>
+            {
+                StringBuilder bilder = new StringBuilder();
+
+                while (!bilder.ToString().EndsWith("Done "))
+                    bilder.Append((char)Reader.Read());
+            });
         }
 
         public void Stop()
@@ -121,7 +128,7 @@ namespace MineCraft_Server_Maneger
             switch (selector)
             {
                 case "@a":
-                    return Players.Where((s) => s.Tags.Contains(Player.PlayerTag.Online)).ToArray();
+                    return AllPlayers.Where((s) => s.Tags.Contains(Player.PlayerTag.Online)).ToArray();
                 case "@r":
                     return new Player[] { GetPlayersBySelector("@a")[new Random().Next(0,
                         GetPlayersBySelector("@a").Length - 1)]};
@@ -144,7 +151,7 @@ namespace MineCraft_Server_Maneger
 
         public Player GetPlayerByName(string name, bool reqOnline = true)
         {
-            return Players.Where((f) => (!reqOnline || f.Tags.Contains(Player.PlayerTag.Online))
+            return AllPlayers.Where((f) => (!reqOnline || f.Tags.Contains(Player.PlayerTag.Online))
                 && f.Name == name).Single();
         }
 
@@ -238,8 +245,8 @@ namespace MineCraft_Server_Maneger
                 var t = ReadConsoleSegment("__SqiMSMrr_L_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
                     "__SqiMSMrr_L_E_d1a6e6d543f8bdc92ed38af4ca0b5b30");
                 var g = t.Replace("\r\n", "\u1234").Split('\u1234');
-                //var h = new string[g.Length - 1];
-                //Array.Copy(g, h, h.Length);
+
+                if (g[0] == "" && g.Length == 1) return new string[0];
 
                 g = g.Select((s) => s.Substring("[11:24:25 INFO]: ".Length)).ToArray();
 
@@ -280,6 +287,9 @@ namespace MineCraft_Server_Maneger
                 while (startCount != 0);
 
                 var s = builder.ToString();
+
+                if (s.Length - s.Reverse().ToList().IndexOf('\n') - 4 < 2) return /*"[11:24:25 INFO]:"*/ "";
+
                 s = s.Substring(2, s.Length - s.Reverse().ToList().IndexOf('\n') - 4);
 
 

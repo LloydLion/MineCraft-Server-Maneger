@@ -22,8 +22,8 @@ namespace MineCraft_Server_Maneger.Actions
             if (r == null) return;
 
             TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
-            (float x, float z) cords = ServerManeger.GlobalManeger.Locate(r.Locate);
-            UIManeger.GlobalManeger.UpdateCommandOutput($"{cords.x} [y?] {cords.z}", now);
+            (float x, float z) = ServerManeger.GlobalManeger.Locate(r.Locate);
+            UIManeger.GlobalManeger.UpdateCommandOutput($"{x} [y?] {z}", now);
         }
 
         public override bool IsEnabled()

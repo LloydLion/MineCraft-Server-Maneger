@@ -7,9 +7,12 @@ namespace MineCraft_Server_Maneger.Models
     {
         private bool isRunnning;
         private bool isSelected;
+        private bool isDoneStarted;
 
         public bool IsRunnning { get => isRunnning; set { isRunnning = value; OnPropertyChanged(); } }
         public bool IsSelected { get => isSelected; set { isSelected = value; OnPropertyChanged(); } }
+        public bool IsDoneStarted { get => isDoneStarted; set { isDoneStarted = value; OnPropertyChanged(); } }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

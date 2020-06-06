@@ -22,7 +22,7 @@ namespace MineCraft_Server_Maneger.Forms
 
         public ExecuteClearActionFormResult Result { get; private set; }
 
-        private Player[] players;
+        private readonly Player[] players;
 
         public ExecuteClearActionForm(Player[] players)
         {

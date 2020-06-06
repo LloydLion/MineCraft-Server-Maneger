@@ -16,12 +16,12 @@ namespace MineCraft_Server_Maneger
 
         public ServerInfo ServerInfo { get; set; }
         public ServerStade ServerStade { get; set; }
-        //public StreamWriter InputStream { get => ServerProcess.StandardInput; }
-        //public StreamReader OutputStream { get => ServerProcess.StandardOutput; }
-        //public Process ServerProcess { get; set; }
+
         public Control[] Controls { get; set; }
 
-        public virtual bool IsEnabled() => ServerStade.IsSelected && ServerStade.IsRunnning;
+        public virtual bool IsEnabled() => ServerStade.IsSelected && 
+            ServerStade.IsRunnning && ServerStade.IsDoneStarted;
+
         public abstract void Handler();
     }
 }

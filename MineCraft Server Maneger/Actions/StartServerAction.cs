@@ -13,9 +13,13 @@ namespace MineCraft_Server_Maneger.Actions
         public override string ActionName => "common.start_server";
         public override void Handler()
         {
-            ServerManeger.GlobalManeger.Start();
+            var task = ServerManeger.GlobalManeger.Start();
             ServerStade.IsRunnning = true;
             MessageBox.Show("Server is starting");
+
+            task.Wait();
+            ServerStade.IsDoneStarted = true;
+            MessageBox.Show("Server has started");
         }
 
         public override bool IsEnabled()

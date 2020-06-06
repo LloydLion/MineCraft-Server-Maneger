@@ -58,7 +58,75 @@ namespace MineCraft_Server_Maneger
             CommandOutput += $"\r\n{t}{q}{t}\r\n{a}\r\n";
         }
 
+        public void Invoke(Delegate del)
+        {
+            commandOutputTextBox.Invoke
+                (new Action(() => playersListView.Invoke
+                (new Action(() => commandInputTextBox.Invoke(del)))));
+        }
+
         public string CommandOutput { get => commandOutputTextBox.Text; set => commandOutputTextBox.Text = value; }
         public string CommandInput { get => commandInputTextBox.Text; private set => commandInputTextBox.Text = value; }
+        public PlayersFilter ListFilter { get; set; } = new PlayersFilter();
+        public List<Player> FavoritePlayers { get; }
+
+
+        public class PlayersFilter
+        {
+            private FilterType type;
+
+            public object Argument { get; set; }
+            public FilterType Type { get => type; set { type = value; Argument = null; } }
+
+            public enum FilterType
+            {
+                Online,
+                Gamemode,
+                Operator,
+                Whitelist,
+                Banned,
+                Favorite
+            }
+        }
+
+        public void ComputePlayersList(ref Player[] players)
+        {
+            Func<Player, bool> func;
+
+            switch(ListFilter.Type)
+            {
+                case PlayersFilter.FilterType.Online:
+                    func = (s) => s.Tags.Contains(Player.PlayerTag.Online);
+                    break;
+
+                case PlayersFilter.FilterType.Operator:
+                    func = (s) => s.Tags.Contains(Player.PlayerTag.Operator);
+                    break;
+
+                case PlayersFilter.FilterType.Banned:
+                    func = (s) => s.Tags.Contains(Player.PlayerTag.Banned);
+                    break;
+
+                case PlayersFilter.FilterType.Whitelist:
+                    func = (s) => s.Tags.Contains(Player.PlayerTag.Whitelisted);
+                    break;
+
+                case PlayersFilter.FilterType.Favorite:
+                    func = (s) => FavoritePlayers.Contains(s);
+                    break;
+
+                case PlayersFilter.FilterType.Gamemode:
+                    int num = (int)ListFilter.Argument;
+
+                    //Rewrite!
+                    func = (s) => true;
+                    break;
+
+                default:
+                    throw new Exception("ListFilter has invalid value");
+            }
+
+            players = players.Where(func).ToArray();
+        }
     }
 }

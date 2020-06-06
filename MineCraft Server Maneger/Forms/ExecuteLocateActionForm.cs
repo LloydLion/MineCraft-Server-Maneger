@@ -16,7 +16,7 @@ namespace MineCraft_Server_Maneger.Forms
 
         public ExecuteLocateActionFormResult Result { get; private set; }
 
-        private Locate[] locates;
+        private readonly Locate[] locates;
         public ExecuteLocateActionForm(Locate[] locates)
         {
             InitializeComponent();

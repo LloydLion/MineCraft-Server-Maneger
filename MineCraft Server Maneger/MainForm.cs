@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MineCraft_Server_Maneger.Models;
@@ -64,20 +65,22 @@ namespace MineCraft_Server_Maneger
             }
 
             maneger = new ServerManeger(serverProcess, info.GameVersion);
+
             uimaneger = new UIManeger(commandsOutputTextBox, commandsInputTextBox, filtratedPlayersListView);
+            uimaneger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Online;
 
             actions = Assembly.GetExecutingAssembly().GetTypes().Where
-                ((d) => d.Namespace == this.GetType().Namespace + ".Actions" && 
+                ((d) => d.Namespace == this.GetType().Namespace + ".Actions" &&
                         d.BaseType == typeof(ActionBase) &&
                         d.GetConstructor(new Type[0]) != null).Select
                 ((f) => (ActionBase)f.GetConstructor(new Type[0]).Invoke(new object[0])).ToArray();
 
-            actions = actions.Select((a) => 
+            actions = actions.Select((a) =>
             {
                 a.ServerInfo = serverInfo;
                 a.ServerStade = stade;
 
-                return a; 
+                return a;
             }).ToArray();
 
             var buttons = this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
@@ -106,7 +109,7 @@ namespace MineCraft_Server_Maneger
                     var t = new string[p.Length - 2];
                     t = t.Select((_3, s) => p[s + 1]).ToArray();
 
-                    if(p[0] == el1 && el2split.Length == t.Length && 
+                    if (p[0] == el1 && el2split.Length == t.Length &&
                         Array.TrueForAll(el2split.Select((q, s) => q == t[s]).ToArray(), (s) => s))
                     {
                         ((Button)b.GetValue(this)).Click += (_1, _2) => g.Handler();
@@ -135,6 +138,60 @@ namespace MineCraft_Server_Maneger
             }
 
             e.Cancel = false;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            /*filtratedPlayersListView.BeginInvoke(new Action(() =>
+            {
+                Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        ListViewItem[] newItems = null;
+
+                        TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
+
+                        filtratedPlayersListView.BeginInvoke(new Action(() =>
+                        {
+                            var tsk = Task.Run(() =>
+                            {
+                                try
+                                {
+                                    newItems =
+                                    maneger.AllPlayers.Select((s) => new ListViewItem(s.Name)).ToArray();
+                                }
+                                catch (Exception) { }
+                            });
+
+
+                            while (!tsk.IsCompleted ||
+                                new TimeSpan(DateTime.Now.Ticks) - now <= new TimeSpan(0, 0, 5)) { }
+                        }));
+
+                        if (newItems != null)
+                        {
+                            filtratedPlayersListView.Items.Clear();
+                            filtratedPlayersListView.Items.AddRange(newItems);
+                        }
+
+                        Thread.Sleep(5000);
+                    }
+                });
+            }));*/
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (!stade.IsDoneStarted) return;
+
+            var players = maneger.AllPlayers;
+
+            uimaneger.ComputePlayersList(ref players);
+
+            filtratedPlayersListView.Items.Clear();
+            filtratedPlayersListView.Items.AddRange
+                (players.Select((s) => new ListViewItem(s.Name)).ToArray());
         }
     }
 }

@@ -15,6 +15,7 @@ namespace MineCraft_Server_Maneger.Actions
         {
             ServerManeger.GlobalManeger.Stop();
             ServerStade.IsRunnning = false;
+            ServerStade.IsDoneStarted = false;
             MessageBox.Show("Server has stopped");
         }
     }
