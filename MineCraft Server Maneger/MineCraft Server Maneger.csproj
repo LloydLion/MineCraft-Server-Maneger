@@ -63,6 +63,7 @@
     <Compile Include="Actions\ExecuteWeatherAction.cs" />
     <Compile Include="Actions\ExecuteXpAction.cs" />
     <Compile Include="Actions\RestartServerAction.cs" />
+    <Compile Include="Actions\RunCommandAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
     <Compile Include="Forms\ExecuteDifficultyActionForm.cs">
