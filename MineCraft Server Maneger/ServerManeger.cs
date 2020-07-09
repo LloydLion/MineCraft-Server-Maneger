@@ -6,6 +6,7 @@ using MineCraft_Server_Maneger.Models.Generic;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace MineCraft_Server_Maneger
 {
@@ -16,7 +17,7 @@ namespace MineCraft_Server_Maneger
         private readonly Process serverProcess;
         private StreamReader Reader { get => serverProcess.StandardOutput; }
         private StreamWriter Writer { get => serverProcess.StandardInput; }
-        public MCVersion MCVersion { get; }
+		public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
         public VersionManeger VersionManeger { get; }
 
@@ -187,6 +188,17 @@ namespace MineCraft_Server_Maneger
             return h;
         }
 
+        public Gamemode GetGamemodeFromPlayer(Player player)
+        {
+            var tmp = int.Parse(pluginSubManeger.Get("player-gm " + player.Name));
+
+			var r = Enum.GetValues(typeof(Gamemode)).OfType<Gamemode>().Select((s) => (int)s)
+				.Where((s) => s != int.MinValue).ToArray();
+
+            if (r.Contains(tmp)) return (Gamemode)tmp;
+            else return Gamemode.Other;
+        }
+
         public void SetGamerule<T>(Gamerule<T> rule, T value, out string result)
         {
             result = Execute(new Command("gamerule", rule.Name, value.ToString().ToLower()));
@@ -236,6 +248,14 @@ namespace MineCraft_Server_Maneger
                     Maneger.Writer.WriteLine(args);
                     return null;
                 }
+            }
+
+            public string Get(string args)
+			{
+                InvokeLLLManeger("get " + args);
+
+                return ReadConsoleSegment("__SqiMSMrr_G_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
+                    "__SqiMSMrr_G_E_d1a6e6d543f8bdc92ed38af4ca0b5b30").Substring("[11:24:25 INFO]: ".Length);
             }
 
             public string[] List(string args)

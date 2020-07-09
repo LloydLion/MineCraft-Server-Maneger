@@ -64,6 +64,8 @@
     <Compile Include="Actions\ExecuteXpAction.cs" />
     <Compile Include="Actions\RestartServerAction.cs" />
     <Compile Include="Actions\RunCommandAction.cs" />
+    <Compile Include="Actions\FilterActions.cs" />
+    <Compile Include="Actions\SetGamemodeFilterAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
     <Compile Include="Forms\ExecuteDifficultyActionForm.cs">
@@ -120,6 +122,12 @@
     <Compile Include="Forms\ExecuteXpActionForm.Designer.cs">
       <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SetGamemodeFilterActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetGamemodeFilterActionForm.Designer.cs">
+      <DependentUpon>SetGamemodeFilterActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstallServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +147,7 @@
     <Compile Include="Models\Generic\Effect.cs" />
     <Compile Include="Models\Generic\EffectType.cs" />
     <Compile Include="Models\Generic\Entity.cs" />
+    <Compile Include="Models\Generic\Gamemode.cs" />
     <Compile Include="Models\Generic\Gamerule.cs" />
     <Compile Include="Models\Generic\Locate.cs" />
     <Compile Include="Models\Generic\MCVersion.cs" />
@@ -186,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteXpActionForm.resx">
       <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetGamemodeFilterActionForm.resx">
+      <DependentUpon>SetGamemodeFilterActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstallServerForm.resx">
       <DependentUpon>InstallServerForm.cs</DependentUpon>

@@ -15,6 +15,9 @@ namespace MineCraft_Server_Maneger.Models.Generic
 
         public List<PlayerTag> Tags { get; } = new List<PlayerTag>();
 
+        public Gamemode CurrentGamemode =>
+                ServerManeger.GlobalManeger.GetGamemodeFromPlayer(this);
+
         public override object Clone()
         {
             return new Player(Name);

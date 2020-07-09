@@ -92,34 +92,44 @@ namespace MineCraft_Server_Maneger
         public void ComputePlayersList(ref Player[] players)
         {
             Func<Player, bool> func;
+            Func<Player, bool> tfunc;
+            object a = ListFilter.Argument;
 
-            switch(ListFilter.Type)
+            switch (ListFilter.Type)
             {
                 case PlayersFilter.FilterType.Online:
-                    func = (s) => s.Tags.Contains(Player.PlayerTag.Online);
+                    tfunc = (s) => s.Tags.Contains(Player.PlayerTag.Online);
+                    if ((int)a == -1) func = (s) => !tfunc(s);
+                    else func = tfunc;
                     break;
 
                 case PlayersFilter.FilterType.Operator:
-                    func = (s) => s.Tags.Contains(Player.PlayerTag.Operator);
+                    tfunc = (s) => s.Tags.Contains(Player.PlayerTag.Operator);
+                    if ((int)a == -1) func = (s) => !tfunc(s);
+                    else func = tfunc;
                     break;
 
                 case PlayersFilter.FilterType.Banned:
-                    func = (s) => s.Tags.Contains(Player.PlayerTag.Banned);
+                    tfunc = (s) => s.Tags.Contains(Player.PlayerTag.Banned);
+                    if ((int)a == -1) func = (s) => !tfunc(s);
+                    else func = tfunc;
                     break;
 
                 case PlayersFilter.FilterType.Whitelist:
-                    func = (s) => s.Tags.Contains(Player.PlayerTag.Whitelisted);
+                    tfunc = (s) => s.Tags.Contains(Player.PlayerTag.Whitelisted);
+                    if ((int)a == -1) func = (s) => !tfunc(s);
+                    else func = tfunc;
                     break;
 
                 case PlayersFilter.FilterType.Favorite:
-                    func = (s) => FavoritePlayers.Contains(s);
+                    tfunc = (s) => FavoritePlayers.Contains(s);
+                    if ((int)a == -1) func = (s) => !tfunc(s);
+                    else func = tfunc;
                     break;
 
                 case PlayersFilter.FilterType.Gamemode:
-                    int num = (int)ListFilter.Argument;
-
-                    //Rewrite!
-                    func = (s) => true;
+                    var gm = (Gamemode)a;
+                    func = (s) => s.CurrentGamemode == gm;
                     break;
 
                 default:
