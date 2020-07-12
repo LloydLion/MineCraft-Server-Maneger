@@ -31,12 +31,12 @@
 			this.components = new System.ComponentModel.Container();
 			this.filtratedPlayersListView = new System.Windows.Forms.ListView();
 			this.label1 = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
-			this.button6 = new System.Windows.Forms.Button();
+			this.actionsBanPlayerButton = new System.Windows.Forms.Button();
+			this.actionsKickPlayerButton = new System.Windows.Forms.Button();
+			this.actionsKillPlayerButton = new System.Windows.Forms.Button();
+			this.actionsOpPlayerButton = new System.Windows.Forms.Button();
+			this.actionsGamemodePlayerButton = new System.Windows.Forms.Button();
+			this.actionsTpPlayerButton = new System.Windows.Forms.Button();
 			this.filterOnlineButton = new System.Windows.Forms.Button();
 			this.filterWhitelistButton = new System.Windows.Forms.Button();
 			this.filterBannedButton = new System.Windows.Forms.Button();
@@ -101,59 +101,59 @@
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Players";
 			// 
-			// button1
+			// actionsBanPlayerButton
 			// 
-			this.button1.Location = new System.Drawing.Point(6, 19);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 2;
-			this.button1.Text = "Ban";
-			this.button1.UseVisualStyleBackColor = true;
+			this.actionsBanPlayerButton.Location = new System.Drawing.Point(6, 19);
+			this.actionsBanPlayerButton.Name = "actionsBanPlayerButton";
+			this.actionsBanPlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsBanPlayerButton.TabIndex = 2;
+			this.actionsBanPlayerButton.Text = "Ban";
+			this.actionsBanPlayerButton.UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// actionsKickPlayerButton
 			// 
-			this.button2.Location = new System.Drawing.Point(114, 19);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Kick";
-			this.button2.UseVisualStyleBackColor = true;
+			this.actionsKickPlayerButton.Location = new System.Drawing.Point(114, 19);
+			this.actionsKickPlayerButton.Name = "actionsKickPlayerButton";
+			this.actionsKickPlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsKickPlayerButton.TabIndex = 3;
+			this.actionsKickPlayerButton.Text = "Kick";
+			this.actionsKickPlayerButton.UseVisualStyleBackColor = true;
 			// 
-			// button3
+			// actionsKillPlayerButton
 			// 
-			this.button3.Location = new System.Drawing.Point(6, 49);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 23);
-			this.button3.TabIndex = 4;
-			this.button3.Text = "Kill";
-			this.button3.UseVisualStyleBackColor = true;
+			this.actionsKillPlayerButton.Location = new System.Drawing.Point(6, 49);
+			this.actionsKillPlayerButton.Name = "actionsKillPlayerButton";
+			this.actionsKillPlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsKillPlayerButton.TabIndex = 4;
+			this.actionsKillPlayerButton.Text = "Kill";
+			this.actionsKillPlayerButton.UseVisualStyleBackColor = true;
 			// 
-			// button4
+			// actionsOpPlayerButton
 			// 
-			this.button4.Location = new System.Drawing.Point(114, 50);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(75, 23);
-			this.button4.TabIndex = 5;
-			this.button4.Text = "Operator";
-			this.button4.UseVisualStyleBackColor = true;
+			this.actionsOpPlayerButton.Location = new System.Drawing.Point(114, 50);
+			this.actionsOpPlayerButton.Name = "actionsOpPlayerButton";
+			this.actionsOpPlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsOpPlayerButton.TabIndex = 5;
+			this.actionsOpPlayerButton.Text = "Operator";
+			this.actionsOpPlayerButton.UseVisualStyleBackColor = true;
 			// 
-			// button5
+			// actionsGamemodePlayerButton
 			// 
-			this.button5.Location = new System.Drawing.Point(114, 79);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(75, 23);
-			this.button5.TabIndex = 7;
-			this.button5.Text = "Gamemode";
-			this.button5.UseVisualStyleBackColor = true;
+			this.actionsGamemodePlayerButton.Location = new System.Drawing.Point(114, 79);
+			this.actionsGamemodePlayerButton.Name = "actionsGamemodePlayerButton";
+			this.actionsGamemodePlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsGamemodePlayerButton.TabIndex = 7;
+			this.actionsGamemodePlayerButton.Text = "Gamemode";
+			this.actionsGamemodePlayerButton.UseVisualStyleBackColor = true;
 			// 
-			// button6
+			// actionsTpPlayerButton
 			// 
-			this.button6.Location = new System.Drawing.Point(6, 79);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(75, 23);
-			this.button6.TabIndex = 6;
-			this.button6.Text = "Teleport";
-			this.button6.UseVisualStyleBackColor = true;
+			this.actionsTpPlayerButton.Location = new System.Drawing.Point(6, 79);
+			this.actionsTpPlayerButton.Name = "actionsTpPlayerButton";
+			this.actionsTpPlayerButton.Size = new System.Drawing.Size(75, 23);
+			this.actionsTpPlayerButton.TabIndex = 6;
+			this.actionsTpPlayerButton.Text = "Teleport";
+			this.actionsTpPlayerButton.UseVisualStyleBackColor = true;
 			// 
 			// filterOnlineButton
 			// 
@@ -226,12 +226,12 @@
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.button1);
-			this.groupBox2.Controls.Add(this.button2);
-			this.groupBox2.Controls.Add(this.button6);
-			this.groupBox2.Controls.Add(this.button3);
-			this.groupBox2.Controls.Add(this.button5);
-			this.groupBox2.Controls.Add(this.button4);
+			this.groupBox2.Controls.Add(this.actionsBanPlayerButton);
+			this.groupBox2.Controls.Add(this.actionsKickPlayerButton);
+			this.groupBox2.Controls.Add(this.actionsTpPlayerButton);
+			this.groupBox2.Controls.Add(this.actionsKillPlayerButton);
+			this.groupBox2.Controls.Add(this.actionsGamemodePlayerButton);
+			this.groupBox2.Controls.Add(this.actionsOpPlayerButton);
 			this.groupBox2.Location = new System.Drawing.Point(497, 367);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(195, 118);
@@ -547,12 +547,12 @@
 
         private System.Windows.Forms.ListView filtratedPlayersListView;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button actionsBanPlayerButton;
+        private System.Windows.Forms.Button actionsKickPlayerButton;
+        private System.Windows.Forms.Button actionsKillPlayerButton;
+        private System.Windows.Forms.Button actionsOpPlayerButton;
+        private System.Windows.Forms.Button actionsGamemodePlayerButton;
+        private System.Windows.Forms.Button actionsTpPlayerButton;
         private System.Windows.Forms.Button filterOnlineButton;
         private System.Windows.Forms.Button filterWhitelistButton;
         private System.Windows.Forms.Button filterBannedButton;

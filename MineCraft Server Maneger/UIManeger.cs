@@ -129,7 +129,7 @@ namespace MineCraft_Server_Maneger
 
                 case PlayersFilter.FilterType.Gamemode:
                     var gm = (Gamemode)a;
-                    func = (s) => s.CurrentGamemode == gm;
+                    func = (s) => s.GetCurrentGamemode() == gm;
                     break;
 
                 default:

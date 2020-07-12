@@ -143,43 +143,7 @@ namespace MineCraft_Server_Maneger
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			/*filtratedPlayersListView.BeginInvoke(new Action(() =>
-			{
-				Task.Run(() =>
-				{
-					while (true)
-					{
-						ListViewItem[] newItems = null;
 
-						TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
-
-						filtratedPlayersListView.BeginInvoke(new Action(() =>
-						{
-							var tsk = Task.Run(() =>
-							{
-								try
-								{
-									newItems =
-									maneger.AllPlayers.Select((s) => new ListViewItem(s.Name)).ToArray();
-								}
-								catch (Exception) { }
-							});
-
-
-							while (!tsk.IsCompleted ||
-								new TimeSpan(DateTime.Now.Ticks) - now <= new TimeSpan(0, 0, 5)) { }
-						}));
-
-						if (newItems != null)
-						{
-							filtratedPlayersListView.Items.Clear();
-							filtratedPlayersListView.Items.AddRange(newItems);
-						}
-
-						Thread.Sleep(5000);
-					}
-				});
-			}));*/
 		}
 
 		private void Timer_Tick(object sender, EventArgs e)

@@ -1,15 +1,13 @@
-﻿using MineCraft_Server_Maneger.Models.Generic;
+﻿using MineCraft_Server_Maneger.Interfaces;
+using MineCraft_Server_Maneger.Models.Generic;
 using Newtonsoft.Json;
+using StandardLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using StandardLibrary.Interfaces;
-using MineCraft_Server_Maneger.Interfaces;
 
 namespace MineCraft_Server_Maneger
 {
@@ -386,6 +384,13 @@ namespace MineCraft_Server_Maneger
 			}
 			else
 				throw new ArgumentException("el isn't has valid type!", nameof(el));
+		}
+
+		public string TranslateGamemodeObjectToChangeGamemodeCommandInput(Gamemode gamemode)
+		{
+			if (gamemode == Gamemode.Other) throw new ArgumentException("It mustn't be Gamemode.Other", nameof(gamemode));
+
+			return Version >= new MCVersion("1.13") ? gamemode.ToString().ToLower() : ((int)gamemode).ToString();
 		}
 	}
 }

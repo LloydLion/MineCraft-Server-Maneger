@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Runtime.Versioning;
 
 namespace MineCraft_Server_Maneger
 {
@@ -222,8 +225,67 @@ namespace MineCraft_Server_Maneger
 
         public (float x, float z) Locate(Locate locate)
         {
-            return VersionManeger.ParseLocateCommandOutput(Execute(new Command("locate", locate.Id)));
+            return VersionManeger.ParseLocateCommandOutput(DoSimpleActionWithTarget("locate", locate.Id.ToString()));
         }
+
+        public void ToggleBanStatusForPlayer(Player target, bool value, out string result)
+		{
+            string tmp = "ban";
+            if (value == false) tmp = "pardon"; 
+			
+            result = DoSimpleActionWithTarget(tmp, target.Name);
+		}
+
+        public void ToggleBanStatusForPlayer(Player target, out string result)
+		{
+            ToggleBanStatusForPlayer(target, !target.Tags.Contains(Player.PlayerTag.Banned), out result);
+		}
+
+        public void KickPlayer(Player target, out string result)
+		{
+            result = DoSimpleActionWithTarget("kick", target.Name);
+		}
+
+        public void ToggleOperatorStatusForPlayer(Player target, bool value, out string result)
+        {
+            string tmp = "op";
+            if (value == false) tmp = "deop";
+
+            result = DoSimpleActionWithTarget(tmp, target.Name);
+        }
+        
+        public void ToggleOperatorStatusForPlayer(Player target, out string result)
+        {
+            ToggleOperatorStatusForPlayer(target, !target.Tags.Contains(Player.PlayerTag.Operator), out result);
+        }
+
+        public void TeleportPlayer(Player target, (float x, float y, float z) position, out string result)
+		{
+            result = Execute(new Command("tp", target.Name, position.x, position.y, position.z));
+		}
+
+        public void TeleportPlayer(Player target, Player position, out string result)
+		{
+            result = Execute(new Command("tp", target.Name, position.Name));
+		}
+
+        public void ChangePlayerGamemode(Player target, Gamemode gamemode, out string result)
+        {
+            if (gamemode == Gamemode.Other) throw new ArgumentException("It mustn't be Gamemode.Other", nameof(gamemode));
+
+            result = Execute(new Command("gamemode", target.Name, VersionManeger.TranslateGamemodeObjectToChangeGamemodeCommandInput(gamemode)));
+        }
+
+        public void KillPlayer(Player target, out string result)
+		{
+            result = DoSimpleActionWithTarget("kill", target.Name);
+		}
+
+
+        private string DoSimpleActionWithTarget(string command, string target)
+		{
+            return Execute(new Command(command, target));
+		}
 
         private class ControlPluginSubManeger
         {
@@ -287,7 +349,7 @@ namespace MineCraft_Server_Maneger
 
                 do
                 {
-                    g = (char)Maneger.Reader.Read();
+                   g = (char)Maneger.Reader.Read();
                     alphaBuilder.Append(g);
 
                     if (alphaBuilder.ToString().EndsWith(start)) startCount++;
