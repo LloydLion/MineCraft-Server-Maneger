@@ -70,6 +70,7 @@
     <Compile Include="Actions\SetGamemodeFilterAction.cs" />
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
+    <Compile Include="Actions\TeleportPlayerAction.cs" />
     <Compile Include="Forms\ChangePlayerGamemdoeActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +136,12 @@
     </Compile>
     <Compile Include="Forms\SetGamemodeFilterActionForm.Designer.cs">
       <DependentUpon>SetGamemodeFilterActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TeleportPlayerActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeleportPlayerActionForm.Designer.cs">
+      <DependentUpon>TeleportPlayerActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InstallServerForm.cs">
       <SubType>Form</SubType>
@@ -209,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetGamemodeFilterActionForm.resx">
       <DependentUpon>SetGamemodeFilterActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeleportPlayerActionForm.resx">
+      <DependentUpon>TeleportPlayerActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstallServerForm.resx">
       <DependentUpon>InstallServerForm.cs</DependentUpon>
