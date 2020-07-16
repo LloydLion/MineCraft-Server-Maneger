@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
     <Compile Include="Actions\ChangePlayerGamemodeAction.cs" />
+    <Compile Include="Actions\OpenServerDirectoryAction.cs" />
     <Compile Include="Actions\PlayerAtions.cs" />
     <Compile Include="Actions\ExecuteClearAction.cs" />
     <Compile Include="Actions\ExecuteDifficultyAction.cs" />
