@@ -6,10 +6,7 @@ using MineCraft_Server_Maneger.Models.Generic;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Collections;
-using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Runtime.Versioning;
+
 
 namespace MineCraft_Server_Maneger
 {
@@ -18,6 +15,8 @@ namespace MineCraft_Server_Maneger
         public static ServerManeger GlobalManeger { get; private set; }
 
         private readonly Process serverProcess;
+        private readonly ControlPluginSubManeger pluginSubManeger;
+
         private StreamWriter Writer { get => serverProcess.StandardInput; }
 		public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
@@ -59,7 +58,6 @@ namespace MineCraft_Server_Maneger
             } 
         }
 
-        private readonly ControlPluginSubManeger pluginSubManeger;
 
         public ServerManeger(Process serverProcess, MCVersion version)
         {
