@@ -15,5 +15,7 @@ namespace MineCraft_Server_Maneger
             Environment.CurrentDirectory + "\\Core\\data",
             Environment.CurrentDirectory + "\\Core\\world"
         );
+
+        public const string LinesSeparator = "\r\n";
     }
 }

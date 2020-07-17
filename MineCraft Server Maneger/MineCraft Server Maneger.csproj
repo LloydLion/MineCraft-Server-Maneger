@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
     <Compile Include="Actions\ChangePlayerGamemodeAction.cs" />
+    <Compile Include="Actions\OpenConsoleAction.cs" />
     <Compile Include="Actions\OpenServerDirectoryAction.cs" />
     <Compile Include="Actions\PlayerAtions.cs" />
     <Compile Include="Actions\ExecuteClearAction.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Actions\StartServerAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
     <Compile Include="Actions\TeleportPlayerAction.cs" />
+    <Compile Include="ConsoleManeger.cs" />
     <Compile Include="Forms\ChangePlayerGamemdoeActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +133,12 @@
     </Compile>
     <Compile Include="Forms\ExecuteXpActionForm.Designer.cs">
       <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OpenConsoleActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OpenConsoleActionForm.Designer.cs">
+      <DependentUpon>OpenConsoleActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SetGamemodeFilterActionForm.cs">
       <SubType>Form</SubType>
@@ -214,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExecuteXpActionForm.resx">
       <DependentUpon>ExecuteXpActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpenConsoleActionForm.resx">
+      <DependentUpon>OpenConsoleActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetGamemodeFilterActionForm.resx">
       <DependentUpon>SetGamemodeFilterActionForm.cs</DependentUpon>

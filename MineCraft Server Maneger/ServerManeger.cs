@@ -18,11 +18,11 @@ namespace MineCraft_Server_Maneger
         public static ServerManeger GlobalManeger { get; private set; }
 
         private readonly Process serverProcess;
-        private StreamReader Reader { get => serverProcess.StandardOutput; }
         private StreamWriter Writer { get => serverProcess.StandardInput; }
 		public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
         public VersionManeger VersionManeger { get; }
+        public ConsoleManeger ConsoleManeger { get; private set; }
 
         #region VersionManegerProperties
         public Gamerule[] AvailableGamerules { get => VersionManeger.AvailableGamerules; }
@@ -63,9 +63,10 @@ namespace MineCraft_Server_Maneger
 
         public ServerManeger(Process serverProcess, MCVersion version)
         {
-            pluginSubManeger = new ControlPluginSubManeger(this);
             this.serverProcess = serverProcess;
             MCVersion = version;
+
+            pluginSubManeger = new ControlPluginSubManeger(this);
             VersionManeger = new VersionManeger(MCVersion);
 
             if (GlobalManeger == null) GlobalManeger = this;
@@ -84,13 +85,14 @@ namespace MineCraft_Server_Maneger
         public Task Start()
         {
             serverProcess.Start();
+            ConsoleManeger = new ConsoleManeger(serverProcess.StandardOutput, Writer);
 
             return Task.Run(() =>
             {
                 StringBuilder bilder = new StringBuilder();
 
                 while (!bilder.ToString().EndsWith("Done "))
-                    bilder.Append((char)Reader.Read());
+                    bilder.Append(ConsoleManeger.ReadNextSymbol());
             });
         }
 
@@ -98,6 +100,8 @@ namespace MineCraft_Server_Maneger
         {
             ExecutePrimary(new Command("stop"));
             serverProcess.WaitForExit();
+
+            ConsoleManeger = null;
         }
 
         public void ClearPlayerInventory(Player player, out string er)
@@ -124,7 +128,7 @@ namespace MineCraft_Server_Maneger
 
         public void ExecutePrimary(Command command)
         {
-            pluginSubManeger.Execute(command.Name + " " + string.Join(" ", command.Arguments), false);
+            pluginSubManeger.Execute(command.Name + " " + string.Join(" ", command.Arguments), true);
         }
 
         public Player[] GetPlayersBySelector(string selector)
@@ -302,7 +306,7 @@ namespace MineCraft_Server_Maneger
                 {
                     InvokeLLLManeger("execute " + args);
 
-                    return ReadConsoleSegment("__SqiMSMrr_E_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
+                    return Maneger.ConsoleManeger.ReadConsoleSegment("__SqiMSMrr_E_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
                         "__SqiMSMrr_E_E_d1a6e6d543f8bdc92ed38af4ca0b5b30");
                 }
                 else
@@ -316,7 +320,7 @@ namespace MineCraft_Server_Maneger
 			{
                 InvokeLLLManeger("get " + args);
 
-                return ReadConsoleSegment("__SqiMSMrr_G_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
+                return Maneger.ConsoleManeger.ReadConsoleSegment("__SqiMSMrr_G_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
                     "__SqiMSMrr_G_E_d1a6e6d543f8bdc92ed38af4ca0b5b30").Substring("[11:24:25 INFO]: ".Length);
             }
 
@@ -324,7 +328,7 @@ namespace MineCraft_Server_Maneger
             {
                 InvokeLLLManeger("list " + args);
 
-                var t = ReadConsoleSegment("__SqiMSMrr_L_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
+                var t = Maneger.ConsoleManeger.ReadConsoleSegment("__SqiMSMrr_L_S_d1a6e6d543f8bdc92ed38af4ca0b5b30",
                     "__SqiMSMrr_L_E_d1a6e6d543f8bdc92ed38af4ca0b5b30");
                 var g = t.Replace("\r\n", "\u1234").Split('\u1234');
 
@@ -338,44 +342,6 @@ namespace MineCraft_Server_Maneger
             private void InvokeLLLManeger(string args)
             {
                 Maneger.Writer.WriteLine("_lll_manager_ctrl " + args);
-            }
-
-            public string ReadConsoleSegment(string start, string end)
-            {
-                StringBuilder builder = new StringBuilder();
-                StringBuilder alphaBuilder = new StringBuilder();
-                char g;
-                int startCount = 0;
-
-                do
-                {
-                   g = (char)Maneger.Reader.Read();
-                    alphaBuilder.Append(g);
-
-                    if (alphaBuilder.ToString().EndsWith(start)) startCount++;
-                }
-                while (startCount < 1);
-
-                do
-                {
-                    g = (char)Maneger.Reader.Read();
-
-                    if (startCount > 0)
-                        builder.Append(g);
-
-                    if (builder.ToString().EndsWith(start)) startCount++;
-                    else if (builder.ToString().EndsWith(end)) startCount--;
-                }
-                while (startCount != 0);
-
-                var s = builder.ToString();
-
-                if (s.Length - s.Reverse().ToList().IndexOf('\n') - 4 < 2) return /*"[11:24:25 INFO]:"*/ "";
-
-                s = s.Substring(2, s.Length - s.Reverse().ToList().IndexOf('\n') - 4);
-
-
-                return s;
             }
         }
     }
