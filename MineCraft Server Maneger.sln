@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineCraft Server Maneger", "MineCraft Server Maneger\MineCraft Server Maneger.csproj", "{E4B6D887-B3D4-4546-B356-8C2780B876F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B5933C9-3B3B-4DD9-946B-83CF3EC97DF1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteConnectionServiceHost", "RemoteConnectionServiceHost\RemoteConnectionServiceHost.csproj", "{1500D161-A879-43B7-B829-42200A604134}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{E4B6D887-B3D4-4546-B356-8C2780B876F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4B6D887-B3D4-4546-B356-8C2780B876F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4B6D887-B3D4-4546-B356-8C2780B876F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1500D161-A879-43B7-B829-42200A604134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1500D161-A879-43B7-B829-42200A604134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1500D161-A879-43B7-B829-42200A604134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1500D161-A879-43B7-B829-42200A604134}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,7 +20,6 @@ namespace MineCraft_Server_Maneger
 {
 	partial class MainForm : Form
 	{
-		private readonly Process serverProcess;
 		private readonly ServerInfo serverInfo;
 		private readonly ServerStade stade = new ServerStade();
 		private readonly ServerManeger maneger;
@@ -30,32 +29,10 @@ namespace MineCraft_Server_Maneger
 		public MainForm(ServerInfo info)
 		{
 			InitializeComponent();
+
 			serverInfo = info;
 			if (info != null)
 			{
-				serverProcess = new Process
-				{
-#if SHOW
-					StartInfo = new ProcessStartInfo("java", $"-jar \"core.jar\"")
-					{
-						UseShellExecute = true,
-						WorkingDirectory = Static.Path.data,
-						RedirectStandardInput = false,
-						RedirectStandardOutput = false,
-						RedirectStandardError = false
-					}
-#else
-					StartInfo = new ProcessStartInfo("javaw", $"-jar \"core.jar\"")
-					{
-						UseShellExecute = false,
-						WorkingDirectory = Static.Path.data,
-						RedirectStandardInput = true,
-						RedirectStandardOutput = true,
-						RedirectStandardError = true
-					}
-#endif
-				};
-
 				File.Copy(info.Path, $"{Static.Path.data}\\core.jar", true);
 				stade.IsSelected = true;
 			}
@@ -64,7 +41,7 @@ namespace MineCraft_Server_Maneger
 				stade.IsSelected = false;
 			}
 
-			maneger = new ServerManeger(serverProcess, info.GameVersion);
+			maneger = new ServerManeger(info.GameVersion);
 			uimaneger = new UIManeger(commandsOutputTextBox, commandsInputTextBox, filtratedPlayersListView);
 
 			uimaneger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Online;
@@ -75,6 +52,8 @@ namespace MineCraft_Server_Maneger
 						d.BaseType == typeof(ActionBase) &&
 						d.GetConstructor(new Type[0]) != null).Select
 				((f) => (ActionBase)f.GetConstructor(new Type[0]).Invoke(new object[0])).ToArray();
+
+			#region Buttons binding
 
 			actions = actions.Select((a) =>
 			{
@@ -121,6 +100,7 @@ namespace MineCraft_Server_Maneger
 				}
 			}
 
+			#endregion
 
 			commandsOutputTextBox.TextChanged += (sender, e) =>
 			{

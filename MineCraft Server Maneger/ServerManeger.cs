@@ -6,7 +6,8 @@ using MineCraft_Server_Maneger.Models.Generic;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Security.Policy;
+using System.Data.SqlTypes;
 
 namespace MineCraft_Server_Maneger
 {
@@ -14,10 +15,9 @@ namespace MineCraft_Server_Maneger
     {
         public static ServerManeger GlobalManeger { get; private set; }
 
-        private readonly Process serverProcess;
         private readonly ControlPluginSubManeger pluginSubManeger;
+        private readonly ProcessSubManeger processSubManeger;
 
-        private StreamWriter Writer { get => serverProcess.StandardInput; }
 		public MCVersion MCVersion { get; }
         public Player[] OnlinePlayers { get => GetPlayersBySelector("@a"); }
         public VersionManeger VersionManeger { get; }
@@ -59,9 +59,11 @@ namespace MineCraft_Server_Maneger
         }
 
 
-        public ServerManeger(Process serverProcess, MCVersion version)
-        {
-            this.serverProcess = serverProcess;
+        public ServerManeger(MCVersion version) : this(version, ProcessSubManeger.StandardManeger) {  }
+
+        public ServerManeger(MCVersion version, ProcessSubManeger processSubManeger)
+		{
+            this.processSubManeger = processSubManeger;
             MCVersion = version;
 
             pluginSubManeger = new ControlPluginSubManeger(this);
@@ -69,6 +71,7 @@ namespace MineCraft_Server_Maneger
 
             if (GlobalManeger == null) GlobalManeger = this;
         }
+
 
         public string SetTime(int a)
         {
@@ -82,8 +85,8 @@ namespace MineCraft_Server_Maneger
 
         public Task Start()
         {
-            serverProcess.Start();
-            ConsoleManeger = new ConsoleManeger(serverProcess.StandardOutput, Writer);
+            processSubManeger.Launch();
+            ConsoleManeger = new ConsoleManeger(processSubManeger.AppStreamReader, processSubManeger.AppStreamWriter);
 
             return Task.Run(() =>
             {
@@ -97,7 +100,9 @@ namespace MineCraft_Server_Maneger
         public void Stop()
         {
             ExecutePrimary(new Command("stop"));
-            serverProcess.WaitForExit();
+
+            while (processSubManeger.IsRunning)
+                _ = 0;
 
             ConsoleManeger = null;
         }
@@ -287,7 +292,7 @@ namespace MineCraft_Server_Maneger
         private string DoSimpleActionWithTarget(string command, string target)
 		{
             return Execute(new Command(command, target));
-		}
+        }
 
         private class ControlPluginSubManeger
         {
@@ -309,7 +314,7 @@ namespace MineCraft_Server_Maneger
                 }
                 else
                 {
-                    Maneger.Writer.WriteLine(args);
+                    Maneger.processSubManeger.AppStreamWriter.WriteLine(args);
                     return null;
                 }
             }
@@ -339,8 +344,8 @@ namespace MineCraft_Server_Maneger
 
             private void InvokeLLLManeger(string args)
             {
-                Maneger.Writer.WriteLine("_lll_manager_ctrl " + args);
+                Maneger.processSubManeger.AppStreamWriter.WriteLine("_lll_manager_ctrl " + args);
             }
         }
-    }
+	}
 }

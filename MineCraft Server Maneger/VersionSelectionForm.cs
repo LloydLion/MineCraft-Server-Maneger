@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MineCraft_Server_Maneger.Models;
 using System.Diagnostics;
+using MineCraft_Server_Maneger.Remote;
 
 namespace MineCraft_Server_Maneger
 {
@@ -89,5 +90,12 @@ namespace MineCraft_Server_Maneger
             Process.Start(Process.GetCurrentProcess().MainModule.FileName);
             this.Close();
         }
-    }
+
+		private void RemoteButton_Click(object sender, EventArgs e)
+		{
+            this.Hide();
+            new RemoteConnectionForm().ShowDialog();
+            this.Close();
+		}
+	}
 }
