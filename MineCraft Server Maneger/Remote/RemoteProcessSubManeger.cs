@@ -10,18 +10,19 @@ namespace MineCraft_Server_Maneger.Remote
 {
 	class RemoteProcessSubManeger : ProcessSubManeger
 	{
-		private IRemoteConnectionService service;
+		private readonly HostClientInterface service;
+		private readonly ServerIOInterface ioInterface;
 
-		public RemoteProcessSubManeger(IRemoteConnectionService service)
+		public RemoteProcessSubManeger(HostClientInterface service)
 		{
 			this.service = service;
+
+			ioInterface = new ServerIOInterface(service.ReadSimbol, service.Write, service.WriteLine);
 		}
 
-		public override bool IsRunning => service.GetIsRunning();
+		public override bool IsRunning => service.IsRunning;
 
-		public override StreamWriter AppStreamWriter => service.GetAppStreamWriter();
-
-		public override StreamReader AppStreamReader => service.GetAppStreamReader();
+		public override ServerIOInterface Interface => ioInterface;
 
 		public override void Kill() => service.Kill();
 

@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger
 {
-    public abstract class ProcessSubManeger
+    abstract class ProcessSubManeger
     {
         public abstract void Launch();
+
         public abstract void Kill();
 
 
         public abstract bool IsRunning { get; }
-        public abstract StreamWriter AppStreamWriter { get; }
-        public abstract StreamReader AppStreamReader { get; }
+
+        public abstract ServerIOInterface Interface { get; }
 
         public static ProcessSubManeger StandardManeger { get => new LocalProcessSubManeger("core.jar", "", Static.Path.data); }
     }

@@ -61,6 +61,10 @@ namespace MineCraft_Server_Maneger
             {
                 if(info[i].Name == t.Text)
                 {
+                    File.Create(Static.Path.data + "\\meta.meta").Close();
+                    File.WriteAllText(Static.Path.data + "\\meta.meta", JsonConvert.SerializeObject(info[i]));
+                    File.Copy(info[i].Path, $"{Static.Path.data}\\core.jar", true);
+
                     new MainForm(info[i]).ShowDialog();
                     break;
                 }

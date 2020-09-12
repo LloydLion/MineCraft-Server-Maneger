@@ -86,7 +86,7 @@ namespace MineCraft_Server_Maneger
         public Task Start()
         {
             processSubManeger.Launch();
-            ConsoleManeger = new ConsoleManeger(processSubManeger.AppStreamReader, processSubManeger.AppStreamWriter);
+            ConsoleManeger = new ConsoleManeger(processSubManeger.Interface);
 
             return Task.Run(() =>
             {
@@ -314,7 +314,7 @@ namespace MineCraft_Server_Maneger
                 }
                 else
                 {
-                    Maneger.processSubManeger.AppStreamWriter.WriteLine(args);
+                    Maneger.processSubManeger.Interface.WriteLine(args);
                     return null;
                 }
             }
@@ -344,7 +344,7 @@ namespace MineCraft_Server_Maneger
 
             private void InvokeLLLManeger(string args)
             {
-                Maneger.processSubManeger.AppStreamWriter.WriteLine("_lll_manager_ctrl " + args);
+                Maneger.processSubManeger.Interface.WriteLine("_lll_manager_ctrl " + args);
             }
         }
 	}

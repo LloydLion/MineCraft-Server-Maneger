@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace MineCraft_Server_Maneger
 {
-    public class LocalProcessSubManeger : ProcessSubManeger
+    class LocalProcessSubManeger : ProcessSubManeger
     {
         private readonly Process serverProcess;
+        private ServerIOInterface ioInterface;
 
         public LocalProcessSubManeger(string pathToJar, string javaPath, string workingDirectory)
         {
@@ -25,23 +26,32 @@ namespace MineCraft_Server_Maneger
                     UseShellExecute = false,
                     RedirectStandardError = true,
                     RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
+                    RedirectStandardOutput = true
                 }
             };
+
+            ioInterface = new ServerIOInterface(null, null, null);
         }
 
-        public override bool IsRunning => !serverProcess.HasExited;
-        public override StreamWriter AppStreamWriter => serverProcess.StandardInput;
-        public override StreamReader AppStreamReader => serverProcess.StandardOutput;
+        public override bool IsRunning => serverProcess.IsRunning();
 
-        public override void Launch()
+		public override ServerIOInterface Interface => ioInterface;
+
+		public override void Launch()
         {
             serverProcess.Start();
+            ioInterface = new ServerIOInterface(() => (char)serverProcess.StandardOutput.Read(), serverProcess.StandardInput.Write, serverProcess.StandardInput.WriteLine);
+            InterfaceChanged?.Invoke();
         }
 
         public override void Kill()
         {
             serverProcess.Kill();
+            ioInterface = new ServerIOInterface(null, null, null);
+            InterfaceChanged?.Invoke();
         }
+
+
+        public event Action InterfaceChanged;
     }
 }

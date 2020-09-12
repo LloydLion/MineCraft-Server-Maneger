@@ -26,14 +26,15 @@ namespace MineCraft_Server_Maneger
 		private readonly UIManeger uimaneger;
 		private readonly ActionBase[] actions;
 
-		public MainForm(ServerInfo info)
+		public MainForm(ServerInfo info, ProcessSubManeger processMgr = null)
 		{
 			InitializeComponent();
+
+			info.GameVersion.Init();
 
 			serverInfo = info;
 			if (info != null)
 			{
-				File.Copy(info.Path, $"{Static.Path.data}\\core.jar", true);
 				stade.IsSelected = true;
 			}
 			else
@@ -41,7 +42,12 @@ namespace MineCraft_Server_Maneger
 				stade.IsSelected = false;
 			}
 
-			maneger = new ServerManeger(info.GameVersion);
+			if(processMgr != null)
+				maneger = new ServerManeger(info.GameVersion, processMgr);
+			else
+				maneger = new ServerManeger(info.GameVersion);
+
+
 			uimaneger = new UIManeger(commandsOutputTextBox, commandsInputTextBox, filtratedPlayersListView);
 
 			uimaneger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Online;

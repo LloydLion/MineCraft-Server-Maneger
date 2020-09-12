@@ -10,21 +10,20 @@ namespace MineCraft_Server_Maneger
 {
 	class ConsoleManeger
 	{
-		private readonly StreamReader reader;
+        private readonly ServerIOInterface ioInterface;
         private readonly ConsoleRegister rigister = new ConsoleRegister();
 
-        public StreamWriter ConsoleWriter { get; }
+
         public bool WriteSystemMessageToOutput { get; set; } = false;
 
-		public ConsoleManeger(StreamReader reader, StreamWriter writer)
+		public ConsoleManeger(ServerIOInterface ioInterface)
 		{
-			this.reader = reader;
-            ConsoleWriter = writer;
+            this.ioInterface = ioInterface;
         }
 
         public char ReadNextSymbol()
 		{
-            char simbol = (char)reader.Read();
+            char simbol = ioInterface.ReadSimbol();
 
             rigister.WriteAndSplit(simbol.ToString());
             return simbol;
@@ -41,7 +40,7 @@ namespace MineCraft_Server_Maneger
 
             do
             {
-                g = (char)reader.Read();
+                g = ioInterface.ReadSimbol();
                 alphaBuilder.Append(g);
 
                 if (alphaBuilder.ToString().EndsWith(start)) startCount++;
@@ -50,7 +49,7 @@ namespace MineCraft_Server_Maneger
 
             do
             {
-                g = (char)reader.Read();
+                g = ioInterface.ReadSimbol();
 
                 if (startCount > 0)
                     builder.Append(g);
@@ -79,25 +78,36 @@ namespace MineCraft_Server_Maneger
             return s;
         }
 
-        public string GetConsole()
+		public string GetLine(long lineId)
 		{
+            return rigister.Lines.Single((s) => s.strId == lineId).value;
+		}
 
+        public bool IsIdOfLastString(long strId)
+		{
+            return rigister.Lines[rigister.Lines.Count - 1].strId == strId;
+        }
+
+		public string GetConsole()
+		{
             return string.Join(Static.LinesSeparator, rigister.Lines);
         }
 
 		public class ConsoleRegister
 		{
-            private readonly List<string> lines = new List<string>();
+            private readonly List<(string value, long strId)> lines = new List<(string, long)>();
+            private long nextLineId = 0;
+
             public const int MaxLength = 1_000_000;
 
 
-            public IReadOnlyList<string> Lines => lines;
+            public IReadOnlyList<(string value, long strId)> Lines => lines;
 
 
             public void WriteLine(string a)
 			{
                 CheckLengthAndClear();
-                lines.Add(a);
+                lines.Add((a, ++nextLineId));
 			}
 
             public void WriteAndSplit(string a)
@@ -118,7 +128,7 @@ namespace MineCraft_Server_Maneger
 			{
                 if (lines.Count == 0) WriteLine(a);
 
-                lines[lines.Count - 1] += a;
+                lines[lines.Count - 1] = (lines[lines.Count - 1].value + a, lines[lines.Count - 1].strId);
 			}
 
             private void CheckLengthAndClear()

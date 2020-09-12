@@ -199,20 +199,31 @@
     <Compile Include="Models\ServerCoreType.cs" />
     <Compile Include="Models\ServerDownloadInfo.cs" />
     <Compile Include="Models\ServerInfo.cs" />
+    <Compile Include="ProcessExtension.cs" />
     <Compile Include="ProcessSubManeger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ServerStade.cs" />
+    <Compile Include="Remote\ClientHandler.cs" />
+    <Compile Include="Remote\ClientOperation.cs" />
+    <Compile Include="Remote\HostClientInteractor.cs" />
+    <Compile Include="Remote\HostClientInterface.cs" />
+    <Compile Include="Remote\RemoteClient.cs" />
     <Compile Include="Remote\RemoteConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Remote\RemoteConnectionForm.Designer.cs">
       <DependentUpon>RemoteConnectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Remote\IRemoteConnectionService.cs" />
-    <Compile Include="Remote\RemoteConnectionService.cs" />
     <Compile Include="Remote\RemoteConnectionServiceHost.cs" />
+    <Compile Include="Remote\RemoteInteractAttribute.cs" />
+    <Compile Include="Remote\RemoteMethodArgumentContainer.cs" />
     <Compile Include="Remote\RemoteProcessSubManeger.cs" />
+    <Compile Include="Remote\Request.cs" />
+    <Compile Include="Remote\RequestHandler.cs" />
+    <Compile Include="Remote\Responce.cs" />
+    <Compile Include="Remote\ResponceCode.cs" />
+    <Compile Include="ServerIOInterface.cs" />
     <Compile Include="ServerManeger.cs" />
     <Compile Include="Static.cs" />
     <Compile Include="UIManeger.cs" />
