@@ -23,6 +23,8 @@ namespace MineCraft_Server_Maneger
             this.commandInputTextBox = commandInputTextBox;
             this.playersListView = playersListView;
 
+            ListFilter = new PlayersFilter(this);
+
             if (GlobalManeger == null) GlobalManeger = this;
         }
 
@@ -36,7 +38,7 @@ namespace MineCraft_Server_Maneger
                 var p = h.Select((s) => ServerManeger.GlobalManeger.GetPlayerByName(s, false)).ToArray();
 
                 return p;
-            } 
+            }
         }
 
         public Player SelectedPlayer
@@ -58,38 +60,50 @@ namespace MineCraft_Server_Maneger
             CommandOutput += $"\r\n{t}{q}{t}\r\n{a}\r\n";
         }
 
-        public void Invoke(Delegate del)
-        {
-            commandOutputTextBox.Invoke
-                (new Action(() => playersListView.Invoke
-                (new Action(() => commandInputTextBox.Invoke(del)))));
+        public void UpdatePlayersList(Player[] players)
+		{
+            ComputePlayersList(ref players);
+            playersListView.Items.Clear();
+            playersListView.Items.AddRange
+                (players.Select((s) => new ListViewItem(s.Name)).ToArray());
         }
+
 
         public string CommandOutput { get => commandOutputTextBox.Text; set => commandOutputTextBox.Text = value; }
         public string CommandInput { get => commandInputTextBox.Text; private set => commandInputTextBox.Text = value; }
-        public PlayersFilter ListFilter { get; set; } = new PlayersFilter();
+        public PlayersFilter ListFilter { get; }
         public List<Player> FavoritePlayers { get; }
 
 
-        public class PlayersFilter
-        {
-            private FilterType type;
+		public class PlayersFilter
+		{
+			private FilterType type;
+			private object argument;
+			private UIManeger uimaneger;
 
-            public object Argument { get; set; }
-            public FilterType Type { get => type; set { type = value; Argument = null; } }
 
-            public enum FilterType
-            {
-                Online,
-                Gamemode,
-                Operator,
-                Whitelist,
-                Banned,
-                Favorite
-            }
-        }
+			public PlayersFilter(UIManeger uimaneger)
+			{
+				this.uimaneger = uimaneger;
+			}
 
-        public void ComputePlayersList(ref Player[] players)
+
+			public object Argument { get => argument; set { argument = value; } }
+			public FilterType Type { get => type; set { type = value; Argument = null; } }
+
+
+			public enum FilterType
+			{
+				Online,
+				Gamemode,
+				Operator,
+				Whitelist,
+				Banned,
+				Favorite
+			}
+		}
+
+		public void ComputePlayersList(ref Player[] players)
         {
             Func<Player, bool> func;
             Func<Player, bool> tfunc;

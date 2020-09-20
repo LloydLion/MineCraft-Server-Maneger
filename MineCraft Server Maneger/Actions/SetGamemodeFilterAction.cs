@@ -20,6 +20,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Gamemode;
 			UIManeger.GlobalManeger.ListFilter.Argument = r.Gamemode;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 }

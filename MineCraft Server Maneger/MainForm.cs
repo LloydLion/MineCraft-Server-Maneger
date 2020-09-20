@@ -1,6 +1,4 @@
-﻿//#define SHOW
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -140,9 +138,7 @@ namespace MineCraft_Server_Maneger
 
 			uimaneger.ComputePlayersList(ref players);
 
-			filtratedPlayersListView.Items.Clear();
-			filtratedPlayersListView.Items.AddRange
-				(players.Select((s) => new ListViewItem(s.Name)).ToArray());
+
 		}
 	}
 }

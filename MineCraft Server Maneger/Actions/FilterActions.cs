@@ -18,6 +18,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Online;
 			UIManeger.GlobalManeger.ListFilter.Argument = dialog == DialogResult.Yes ? 0 : -1;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 
@@ -34,6 +35,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Whitelist;
 			UIManeger.GlobalManeger.ListFilter.Argument = dialog == DialogResult.Yes ? 0 : -1;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 
@@ -50,6 +52,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Favorite;
 			UIManeger.GlobalManeger.ListFilter.Argument = dialog == DialogResult.Yes ? 0 : -1;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 
@@ -66,6 +69,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Banned;
 			UIManeger.GlobalManeger.ListFilter.Argument = dialog == DialogResult.Yes ? 0 : -1;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 
@@ -82,6 +86,7 @@ namespace MineCraft_Server_Maneger.Actions
 
 			UIManeger.GlobalManeger.ListFilter.Type = UIManeger.PlayersFilter.FilterType.Operator;
 			UIManeger.GlobalManeger.ListFilter.Argument = dialog == DialogResult.Yes ? 0 : -1;
+			UIManeger.GlobalManeger.UpdatePlayersList(ServerManeger.GlobalManeger.AllPlayers);
 		}
 	}
 }
