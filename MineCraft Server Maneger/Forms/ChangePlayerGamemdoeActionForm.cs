@@ -33,6 +33,8 @@ namespace MineCraft_Server_Maneger.Forms
 			{
 				SelectedGamemode = (Gamemode)comboBox.SelectedItem
 			};
+
+			this.Close();
 		}
 	}
 }

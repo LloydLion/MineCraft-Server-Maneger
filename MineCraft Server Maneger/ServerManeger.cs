@@ -88,6 +88,10 @@ namespace MineCraft_Server_Maneger
             processSubManeger.Launch();
             ConsoleManeger = new ConsoleManeger(processSubManeger.Interface);
 
+#if DEBUG
+            ConsoleManeger.WriteSystemMessageToOutput = true;
+#endif
+
             return Task.Run(() =>
             {
                 StringBuilder bilder = new StringBuilder();
@@ -125,7 +129,8 @@ namespace MineCraft_Server_Maneger
         public string Execute(Command command)
         {
             var t = pluginSubManeger.Execute(command.Name + " " + string.Join(" ", command.Arguments));
-            t = t.Substring("[12:01:19 INFO]: ".Length);
+            if(string.IsNullOrWhiteSpace(t)) return "Command hasn't return any result";
+            t = t.Replace("]: ", "\u1234").Split('\u1234')[1];
             return t;
         }
 
@@ -280,7 +285,7 @@ namespace MineCraft_Server_Maneger
         {
             if (gamemode == Gamemode.Other) throw new ArgumentException("It mustn't be Gamemode.Other", nameof(gamemode));
 
-            result = Execute(new Command("gamemode", target.Name, VersionManeger.TranslateGamemodeObjectToChangeGamemodeCommandInput(gamemode)));
+            result = Execute(new Command("gamemode", VersionManeger.TranslateGamemodeObjectToChangeGamemodeCommandInput(gamemode), target.Name));
         }
 
         public void KillPlayer(Player target, out string result)

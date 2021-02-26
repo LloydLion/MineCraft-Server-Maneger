@@ -60,20 +60,26 @@ namespace MineCraft_Server_Maneger
             while (startCount != 0);
 
             var s = builder.ToString();
+            var t = alphaBuilder.ToString();
+
+            if (WriteSystemMessageToOutput == true)
+            {
+                rigister.WriteAndSplit(t);
+                rigister.WriteAndSplit(s);
+            }
 
             if (s.Length - s.Reverse().ToList().IndexOf('\n') - 4 < 2) return /*"[11:24:25 INFO]:"*/ "";
 
             s = s.Substring(2, s.Length - s.Reverse().ToList().IndexOf('\n') - 4);
 
-            var t = alphaBuilder.ToString();
+ 
             t = t.Substring(0, t.Length - (start.Length + "\r\n[11:24:25 INFO]: ".Length));
 
             if (t != "") t = t.Substring(2) + "\r\n";
 
             rigister.WriteAndSplit(t);
 
-            if(WriteSystemMessageToOutput == true)
-                rigister.WriteAndSplit(s);
+
 
             return s;
         }
@@ -90,7 +96,7 @@ namespace MineCraft_Server_Maneger
 
 		public string GetConsole()
 		{
-            return string.Join(Static.LinesSeparator, rigister.Lines);
+            return string.Join(Static.LinesSeparator, rigister.Lines.Select((s) => s.value));
         }
 
 		public class ConsoleRegister
